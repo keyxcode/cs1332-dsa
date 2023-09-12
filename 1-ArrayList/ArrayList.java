@@ -29,7 +29,7 @@ public class ArrayList<T> {
         backingArray = (T[]) new Object[INITIAL_CAPACITY];
     }
 
-    public void grow() {
+    private void grow() {
         int currentCapacity = backingArray.length;
         int newCapacity = currentCapacity * 2;
         T[] resizedArray = (T[]) new Object[newCapacity];
@@ -91,6 +91,10 @@ public class ArrayList<T> {
         size++;
     }
 
+    private void shiftToLeft() {
+
+    }
+
     /**
      * Removes and returns the first data of the list.
      *
@@ -119,6 +123,14 @@ public class ArrayList<T> {
      */
     public T removeFromBack() {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+
+        T data = backingArray[size - 1];
+        backingArray[size - 1] = null;
+        size--;
+        return data;
     }
 
     /**
