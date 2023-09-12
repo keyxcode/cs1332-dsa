@@ -101,9 +101,9 @@ public class ArrayList<T> {
         for (int i = 0; i < size; i++) {
             if (i == size - 1) {
                 backingArray[i] = null;
+            } else {
+                backingArray[i] = backingArray[i + 1];
             }
-
-            backingArray[i] = backingArray[i + 1];
         }
     }
 
