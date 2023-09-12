@@ -29,6 +29,9 @@ public class ArrayList<T> {
         backingArray = (T[]) new Object[INITIAL_CAPACITY];
     }
 
+    /**
+     * Helper function that expands and copies over all the data of the internal array
+     */    
     private void grow() {
         int currentCapacity = backingArray.length;
         int newCapacity = currentCapacity * 2;
@@ -91,6 +94,9 @@ public class ArrayList<T> {
         size++;
     }
 
+    /**
+     * Helper function that shifts all array data to the left to maintain zero alignment 
+     */    
     private void shiftToLeft() {
         for (int i = 0; i < size; i++) {
             if (i == size - 1) {
@@ -120,11 +126,7 @@ public class ArrayList<T> {
         }
         
         T data = backingArray[0];
-        
-        if (size > 1) {
-            shiftToLeft();
-        }
-
+        shiftToLeft();
         size--;
         return data;
     }
