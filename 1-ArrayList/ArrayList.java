@@ -166,6 +166,25 @@ public class ArrayList<T> {
         return backingArray;
     }
 
+
+    /**
+     * Returns element at given index.
+     * 
+     * @throws java.lang.IndexOutOfBoundsException if index is negative
+     * or index > size
+     */
+    public T get(int index) {
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return backingArray[index];
+    }
+
     /**
      * Returns the size of the list.
      *
