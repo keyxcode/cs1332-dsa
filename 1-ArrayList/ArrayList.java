@@ -92,7 +92,13 @@ public class ArrayList<T> {
     }
 
     private void shiftToLeft() {
+        for (int i = 0; i < size; i++) {
+            if (i == size - 1) {
+                backingArray[i] = null;
+            }
 
+            backingArray[i] = backingArray[i + 1];
+        }
     }
 
     /**
@@ -109,6 +115,18 @@ public class ArrayList<T> {
      */
     public T removeFromFront() {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+        
+        T data = backingArray[0];
+        
+        if (size > 1) {
+            shiftToLeft();
+        }
+
+        size--;
+        return data;
     }
 
     /**
