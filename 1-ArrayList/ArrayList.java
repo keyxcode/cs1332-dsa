@@ -53,7 +53,21 @@ public class ArrayList<T> {
      */
     public void addToFront(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        addAtIndex(data, 0);
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        T[] tempArray = (T[]) new Object[backingArray.length];
+        if (size >= backingArray.length) {
+            tempArray = (T[]) new Object[backingArray.length * 2];
+        }
+
+        for (int i = 0; i < size; i++) {
+                tempArray[i + 1] = backingArray[i];
+        }
+        tempArray[0] = data;
+        backingArray = tempArray;
+        size++;
     }
 
     /**
@@ -74,6 +88,7 @@ public class ArrayList<T> {
             grow();
         }
         backingArray[size] = data;
+        size++;
     }
 
     /**
