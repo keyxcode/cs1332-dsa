@@ -29,6 +29,33 @@ public class ArrayList<T> {
         backingArray = (T[]) new Object[INITIAL_CAPACITY];
     }
 
+    public void grow() {
+        int currentCapacity = backingArray.length;
+        int newCapacity = currentCapacity * 2;
+        T[] resizedArray = (T[]) new Object[newCapacity];
+        
+        for (int i = 0; i < currentCapacity; i++) {
+            resizedArray[i] = backingArray[i];
+        }
+
+        backingArray = resizedArray;
+    }
+
+    public void addAtIndex(T data, int index) {
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(); 
+        }
+
+        if (index == size) {
+            grow();   
+        } else {
+
+        }
+    }
+
     /**
      * Adds the data to the front of the list.
      *
@@ -41,10 +68,7 @@ public class ArrayList<T> {
      */
     public void addToFront(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        if (data == null) {
-            throw new IllegalArgumentException();
-        }
-
+        addAtIndex(data, 0);
     }
 
     /**
@@ -57,6 +81,7 @@ public class ArrayList<T> {
      */
     public void addToBack(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        addAtIndex(data, size);
     }
 
     /**
