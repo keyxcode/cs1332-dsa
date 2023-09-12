@@ -41,21 +41,6 @@ public class ArrayList<T> {
         backingArray = resizedArray;
     }
 
-    public void addAtIndex(T data, int index) {
-        if (data == null) {
-            throw new IllegalArgumentException();
-        }
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException(); 
-        }
-
-        if (index == size) {
-            grow();   
-        } else {
-
-        }
-    }
-
     /**
      * Adds the data to the front of the list.
      *
@@ -81,7 +66,14 @@ public class ArrayList<T> {
      */
     public void addToBack(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        addAtIndex(data, size);
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (size == backingArray.length) {
+            grow();
+        }
+        backingArray[size] = data;
     }
 
     /**
