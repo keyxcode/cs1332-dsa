@@ -89,10 +89,12 @@ public class SinglyLinkedList<T> {
         if (size == 1) {
             head = null;
             tail = null;
+            size = 0;
             return data;
         }
 
         head = head.getNext();
+        size -= 1;
 
         return data;
     }
@@ -117,6 +119,7 @@ public class SinglyLinkedList<T> {
         if (size == 1) {
             head = null;
             tail = null;
+            size = 0;
             return data;
         }
 
@@ -127,6 +130,7 @@ public class SinglyLinkedList<T> {
 
         curr.setNext(null);
         tail = curr;
+        size -= 1;
 
         return data;
     }

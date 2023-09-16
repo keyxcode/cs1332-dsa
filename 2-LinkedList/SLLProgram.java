@@ -6,20 +6,26 @@ public class SLLProgram {
 
         myList.addToFront("a");
         System.out.println(myList);
+        System.out.println(myList.size());
 
         myList.addToBack("b");
         System.out.println(myList);
+        System.out.println(myList.size());
 
         myList.addToBack("c");
         System.out.println(myList);
+        System.out.println(myList.size());
 
         myList.removeFromBack();
         System.out.println(myList);
+        System.out.println(myList.size());
 
         myList.removeFromFront();
         System.out.println(myList);
+        System.out.println(myList.size());
 
         myList.removeFromFront();
         System.out.println(myList);
+        System.out.println(myList.size());
     }
 }
