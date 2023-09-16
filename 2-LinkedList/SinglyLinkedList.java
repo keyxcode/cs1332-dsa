@@ -33,8 +33,12 @@ public class SinglyLinkedList<T> {
         SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(data); 
         newNode.setNext(head);
         head = newNode;
-
-        size++;
+        size += 1;
+        
+        // edge case where the list contains only 1 node after add
+        if (size == 1) {
+            tail = newNode;
+        }
     }
 
     /**

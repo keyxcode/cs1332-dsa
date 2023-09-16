@@ -8,7 +8,7 @@ public class SLLProgram {
 
         myList.addToFront("a");
         System.out.println(myList.getHead().getData());
-        System.out.println(myList.getTail());
+        System.out.println(myList.getTail().getData());
         System.out.println(myList.size());
 
         myList.addToBack("b");
