@@ -79,7 +79,22 @@ public class SinglyLinkedList<T> {
      */
     public T removeFromFront() {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+
+        T data = head.getData();
+
+        // edge case where list contains only 1 element
+        if (size == 1) {
+            head = null;
+            tail = null;
+            return data;
+        }
+
+        head = head.getNext();
+
+        return data;
     }
 
     /**

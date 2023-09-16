@@ -15,5 +15,11 @@ public class SLLProgram {
 
         myList.removeFromBack();
         System.out.println(myList);
+
+        myList.removeFromFront();
+        System.out.println(myList);
+
+        myList.removeFromFront();
+        System.out.println(myList);
     }
 }
