@@ -47,6 +47,18 @@ public class SinglyLinkedList<T> {
      */
     public void addToBack(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(data); 
+
+        if (tail != null) {
+            tail.setNext(newNode);
+        }
+        tail = newNode;
+
+        size++;
     }
 
     /**
