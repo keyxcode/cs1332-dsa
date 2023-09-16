@@ -92,7 +92,28 @@ public class SinglyLinkedList<T> {
      */
     public T removeFromBack() {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+
+        T data = tail.getData();
+
+        // edge case where list contains only 1 element
+        if (size == 1) {
+            head = null;
+            tail = null;
+            return data;
+        }
+
+        SinglyLinkedListNode<T> curr = head;
+        while (curr.getNext().getNext() != null) {
+            curr = curr.getNext();
+        }
+
+        curr.setNext(null);
+        tail = curr;
+
+        return data;
     }
 
     /**
