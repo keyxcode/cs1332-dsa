@@ -30,13 +30,14 @@ public class SinglyLinkedList<T> {
             throw new IllegalArgumentException();
         }
 
-        SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(data); 
+        SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(data);
+
         newNode.setNext(head);
         head = newNode;
         size += 1;
         
-        // edge case where the list contains only 1 node after add
-        if (size == 1) {
+        // edge case where the list contains only 1 node after add (aka null before add)
+        if (tail == null) {
             tail = newNode;
         }
     }
@@ -57,8 +58,8 @@ public class SinglyLinkedList<T> {
 
         SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(data); 
 
-        // edge case where the list is empty before add
         if (tail == null) {
+            // edge case where the list is empty before add
             head = newNode;    
         } else {
             tail.setNext(newNode);
