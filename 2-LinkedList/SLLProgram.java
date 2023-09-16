@@ -7,18 +7,12 @@ public class SLLProgram {
         System.out.println(myList.size());
 
         myList.addToFront("a");
-        System.out.println(myList.getHead().getData());
-        System.out.println(myList.getTail().getData());
-        System.out.println(myList.size());
+        System.out.println(myList);
 
         myList.addToBack("b");
-        System.out.println(myList.getHead().getData());
-        System.out.println(myList.getTail().getData());
-        System.out.println(myList.size());
+        System.out.println(myList);
 
         myList.addToBack("c");
-        System.out.println(myList.getHead().getData());
-        System.out.println(myList.getTail().getData());
-        System.out.println(myList.size());
+        System.out.println(myList);
     }
 }

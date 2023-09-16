@@ -133,4 +133,25 @@ public class SinglyLinkedList<T> {
         // DO NOT MODIFY THIS METHOD!
         return size;
     }
+
+    private String toStringHelper(SinglyLinkedListNode<T> curr) {
+        if (curr == null) {
+            return "null";
+        }
+
+        String currString = String.valueOf(curr.getData());
+        if (curr == head) {
+            currString += "(head)";
+        }
+        if (curr == tail) {
+            currString += "(tail)";
+        }
+
+        return currString + " -> " + toStringHelper(curr.getNext());
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper(head);
+    }
 }
