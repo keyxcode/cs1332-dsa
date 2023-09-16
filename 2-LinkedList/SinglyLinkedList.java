@@ -57,12 +57,15 @@ public class SinglyLinkedList<T> {
 
         SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(data); 
 
-        if (tail != null) {
+        // edge case where the list is empty before add
+        if (tail == null) {
+            head = newNode;    
+        } else {
             tail.setNext(newNode);
         }
+    
         tail = newNode;
-
-        size++;
+        size += 1;
     }
 
     /**

@@ -15,5 +15,10 @@ public class SLLProgram {
         System.out.println(myList.getHead().getData());
         System.out.println(myList.getTail().getData());
         System.out.println(myList.size());
+
+        myList.addToBack("c");
+        System.out.println(myList.getHead().getData());
+        System.out.println(myList.getTail().getData());
+        System.out.println(myList.size());
     }
 }
