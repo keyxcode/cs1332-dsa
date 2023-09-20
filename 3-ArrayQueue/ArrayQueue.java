@@ -30,6 +30,17 @@ public class ArrayQueue<T> {
         backingArray = (T[]) new Object[INITIAL_CAPACITY];
     }
 
+    private T[] getExtendedArray() {
+        int currentLength = backingArray.length;
+        T[] extendedArray = (T[]) new Object[currentLength * 2];
+
+        for (int i = 0; i < currentLength; i++) {
+            extendedArray[i] = backingArray[(front + i) % currentLength];
+        }
+
+        return extendedArray;
+    }
+
     /**
      * Adds the data to the back of the queue.
      *
@@ -49,8 +60,8 @@ public class ArrayQueue<T> {
         }
 
         if (size == backingArray.length) {
-            // unwrap
-            // resize
+            backingArray = getExtendedArray();
+            front = 0;
         }
 
         int idx = (front + size) % backingArray.length;
