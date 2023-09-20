@@ -16,7 +16,7 @@ public class ArrayQueue<T> {
      * Do not add new instance variables or modify existing ones.
      */
     private T[] backingArray;
-    private int front;
+    private int front = 2;
     private int size;
 
     /**
@@ -113,5 +113,15 @@ public class ArrayQueue<T> {
     public int size() {
         // DO NOT MODIFY THIS METHOD!
         return size;
+    }
+
+    public void printArray() {
+        int length = backingArray.length;
+
+        for (int i = 0; i < length; i++) {
+            System.out.println(backingArray[i]);
+        }
+
+        System.out.println("");
     }
 }

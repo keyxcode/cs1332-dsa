@@ -4,8 +4,19 @@ public class AQProgram {
 
         myQueue.enqueue("a");
         myQueue.enqueue("b");
+        myQueue.printArray();
+        
+        myQueue.enqueue("a");
+        myQueue.enqueue("b");
+        myQueue.enqueue("a");
+        myQueue.enqueue("b");
+        myQueue.enqueue("a");
+        myQueue.enqueue("b");
+        myQueue.enqueue("a");
+        myQueue.printArray();
 
-        System.out.println(myQueue.size());
-        System.out.println(myQueue.getBackingArray());
+        myQueue.enqueue("a");
+        myQueue.enqueue("b");
+        myQueue.printArray();
     }    
 }
