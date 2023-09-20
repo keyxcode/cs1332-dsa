@@ -13,10 +13,16 @@ public class AQProgram {
         myQueue.enqueue("a");
         myQueue.enqueue("b");
         myQueue.enqueue("a");
+        myQueue.enqueue("b");
+        myQueue.printArray();
+
+        myQueue.dequeue();
         myQueue.printArray();
 
         myQueue.enqueue("a");
-        myQueue.enqueue("b");
+        myQueue.printArray();
+
+        myQueue.dequeue();
         myQueue.printArray();
     }    
 }

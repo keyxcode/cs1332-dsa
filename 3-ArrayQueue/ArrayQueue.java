@@ -1,5 +1,3 @@
-import java.util.NoSuchElementException;
-
 /**
  * Your implementation of an ArrayQueue.
  */
@@ -16,7 +14,7 @@ public class ArrayQueue<T> {
      * Do not add new instance variables or modify existing ones.
      */
     private T[] backingArray;
-    private int front = 2;
+    private int front;
     private int size;
 
     /**
@@ -86,7 +84,13 @@ public class ArrayQueue<T> {
      */
     public T dequeue() {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        T data = backingArray[front];
+        backingArray[front] = null;
+        
+        front = (front + 1) % backingArray.length;
+        size--;
+
+        return data;
     }
 
     /**
@@ -119,7 +123,11 @@ public class ArrayQueue<T> {
         int length = backingArray.length;
 
         for (int i = 0; i < length; i++) {
-            System.out.println(backingArray[i]);
+            if (i == front) {
+                System.out.println(backingArray[i] + " (front)");    
+            } else {
+                System.out.println(backingArray[i]);
+            }
         }
 
         System.out.println("");
