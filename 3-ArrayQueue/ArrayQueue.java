@@ -44,6 +44,18 @@ public class ArrayQueue<T> {
      */
     public void enqueue(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (size == backingArray.length) {
+            // unwrap
+            // resize
+        }
+
+        int idx = (front + size) % backingArray.length;
+        backingArray[idx] = data;
+        size += 1;
     }
 
     /**
