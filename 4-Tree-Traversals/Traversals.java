@@ -29,7 +29,15 @@ public class Traversals<T extends Comparable<? super T>> {
      */
     public List<T> preorder(TreeNode<T> root) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        ArrayList<T> datas = new ArrayList<>();
+
+        if (root != null) {
+            datas.add(root.getData());
+            datas.addAll(preorder(root.getLeft()));
+            datas.addAll(preorder(root.getRight()));
+        }
+
+        return datas;
     }
 
     /**
