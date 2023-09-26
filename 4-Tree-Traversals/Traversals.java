@@ -1,8 +1,5 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import java.util.NoSuchElementException;
 
 /**
  * Your implementation of the pre-order, in-order, and post-order
@@ -14,7 +11,7 @@ public class Traversals<T extends Comparable<? super T>> {
      * DO NOT ADD ANY GLOBAL VARIABLES!
      */
 
-     private void preorderHelper(TreeNode<T> root, List<T> nodes) {
+    private void preorderHelper(TreeNode<T> root, List<T> nodes) {
         if (root != null) {
             nodes.add(root.getData());
             preorderHelper(root.getLeft(), nodes);
@@ -22,7 +19,7 @@ public class Traversals<T extends Comparable<? super T>> {
         }
 
         return;
-     }
+    }
 
     /**
      * Given the root of a binary search tree, generate a
@@ -45,7 +42,7 @@ public class Traversals<T extends Comparable<? super T>> {
         return nodes;
     }
 
-     private void inorderHelper(TreeNode<T> root, List<T> nodes) {
+    private void inorderHelper(TreeNode<T> root, List<T> nodes) {
         if (root != null) {
             inorderHelper(root.getLeft(), nodes);
             nodes.add(root.getData());
@@ -53,7 +50,7 @@ public class Traversals<T extends Comparable<? super T>> {
         }
 
         return;
-     }
+    }
 
     /**
      * Given the root of a binary search tree, generate an
@@ -76,7 +73,7 @@ public class Traversals<T extends Comparable<? super T>> {
         return nodes;
     }
 
-     private void postorderHelper(TreeNode<T> root, List<T> nodes) {
+    private void postorderHelper(TreeNode<T> root, List<T> nodes) {
         if (root != null) {
             postorderHelper(root.getLeft(), nodes);
             postorderHelper(root.getRight(), nodes);
@@ -84,7 +81,7 @@ public class Traversals<T extends Comparable<? super T>> {
         }
 
         return;
-     }
+    }
 
     /**
      * Given the root of a binary search tree, generate a
