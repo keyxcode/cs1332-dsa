@@ -76,6 +76,16 @@ public class Traversals<T extends Comparable<? super T>> {
         return nodes;
     }
 
+     private void postorderHelper(TreeNode<T> root, List<T> nodes) {
+        if (root != null) {
+            postorderHelper(root.getLeft(), nodes);
+            postorderHelper(root.getRight(), nodes);
+            nodes.add(root.getData());
+        }
+
+        return;
+     }
+
     /**
      * Given the root of a binary search tree, generate a
      * post-order traversal of the tree. The original tree
@@ -91,6 +101,9 @@ public class Traversals<T extends Comparable<? super T>> {
      */
     public List<T> postorder(TreeNode<T> root) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        ArrayList<T> nodes = new ArrayList<>();
+        postorderHelper(root, nodes);
+        
+        return nodes;
     }
 }

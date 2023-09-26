@@ -13,6 +13,6 @@ public class TraversalsProgram {
         Traversals<Integer> traversal = new Traversals<>();
         System.out.println(traversal.preorder(root));
         System.out.println(traversal.inorder(root));
-        // System.out.println(traversal.postorder(root));
+        System.out.println(traversal.postorder(root));
     }
 }
