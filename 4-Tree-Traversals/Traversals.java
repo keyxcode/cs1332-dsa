@@ -14,6 +14,16 @@ public class Traversals<T extends Comparable<? super T>> {
      * DO NOT ADD ANY GLOBAL VARIABLES!
      */
 
+     private void preorderHelper(TreeNode<T> root, List<T> nodes) {
+        if (root != null) {
+            nodes.add(root.getData());
+            preorderHelper(root.getLeft(), nodes);
+            preorderHelper(root.getRight(), nodes);
+        }
+
+        return;
+     }
+
     /**
      * Given the root of a binary search tree, generate a
      * pre-order traversal of the tree. The original tree
@@ -29,15 +39,10 @@ public class Traversals<T extends Comparable<? super T>> {
      */
     public List<T> preorder(TreeNode<T> root) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        ArrayList<T> datas = new ArrayList<>();
-
-        if (root != null) {
-            datas.add(root.getData());
-            datas.addAll(preorder(root.getLeft()));
-            datas.addAll(preorder(root.getRight()));
-        }
-
-        return datas;
+        ArrayList<T> nodes = new ArrayList<>();
+        preorderHelper(root, nodes);
+        
+        return nodes;
     }
 
     /**
