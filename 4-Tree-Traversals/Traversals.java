@@ -45,6 +45,16 @@ public class Traversals<T extends Comparable<? super T>> {
         return nodes;
     }
 
+     private void inorderHelper(TreeNode<T> root, List<T> nodes) {
+        if (root != null) {
+            inorderHelper(root.getLeft(), nodes);
+            nodes.add(root.getData());
+            inorderHelper(root.getRight(), nodes);
+        }
+
+        return;
+     }
+
     /**
      * Given the root of a binary search tree, generate an
      * in-order traversal of the tree. The original tree
@@ -60,7 +70,10 @@ public class Traversals<T extends Comparable<? super T>> {
      */
     public List<T> inorder(TreeNode<T> root) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        ArrayList<T> nodes = new ArrayList<>();
+        inorderHelper(root, nodes);
+        
+        return nodes;
     }
 
     /**
