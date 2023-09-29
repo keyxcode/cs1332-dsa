@@ -111,4 +111,8 @@ public class BST<T extends Comparable<? super T>> {
         // DO NOT MODIFY THIS METHOD!
         return size;
     }
+
+    public String toString() {
+        return root.getData() + "\nSize: " + Integer.toString(size);
+    }
 }
