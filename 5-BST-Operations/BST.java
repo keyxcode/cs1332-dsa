@@ -17,13 +17,14 @@ public class BST<T extends Comparable<? super T>> {
 
     private BSTNode<T> rAdd(BSTNode<T> curr, T data) {
         if (curr == null) {
+            size += 1;
             return new BSTNode<T>(data);
         }
         
         if (data.compareTo(curr.getData()) > 0) {
             curr.setRight(rAdd(curr.getRight(), data));
-        } else if (curr.getData().compareTo(data) < 0) {
-            curr.setLeft((rAdd(curr.getLeft(), data)));
+        } else if (data.compareTo(curr.getData()) < 0) {
+            curr.setLeft(rAdd(curr.getLeft(), data));
         }
 
         return curr;
@@ -113,6 +114,6 @@ public class BST<T extends Comparable<? super T>> {
     }
 
     public String toString() {
-        return root.getData() + "\nSize: " + Integer.toString(size);
+        return "Root: " + root.getData() + "\nSize: " + Integer.toString(size);
     }
 }
