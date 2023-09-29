@@ -19,5 +19,19 @@ public class BSTProgram {
 
         myTree.add(5);
         System.out.println(myTree);
+    
+        myTree.add(6);
+        System.out.println(myTree);
+        System.out.println(rootRight.getRight().getData());
+
+        myTree.remove(5);
+        System.out.println(myTree);
+        System.out.println(root.getLeft().getData());
+        System.out.println(root.getRight().getData());
+
+        myTree.remove(4);
+        System.out.println(myTree);
+        System.out.println(root.getLeft().getData());
+        System.out.println(root.getRight());
     }
 }

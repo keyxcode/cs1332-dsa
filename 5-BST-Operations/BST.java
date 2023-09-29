@@ -55,6 +55,50 @@ public class BST<T extends Comparable<? super T>> {
         root = rAdd(root, data);
     }
 
+    private BSTNode<T> removeSuccessor(BSTNode<T> curr, BSTNode<T> dummy) {
+        if (curr.getLeft() == null) {
+            dummy.setData(curr.getData());
+            return curr.getRight();
+        }
+
+        curr.setLeft(removeSuccessor(curr.getLeft(), dummy));
+        return curr;
+    }
+
+    private BSTNode<T> rRemove(BSTNode<T> curr, T data) {
+        if (curr == null) {
+            throw new NoSuchElementException();
+        }
+        
+        if (data.compareTo(curr.getData()) > 0) {
+            curr.setRight(rRemove(curr.getRight(), data));
+        } else if (data.compareTo(curr.getData()) < 0) {
+            curr.setLeft(rRemove(curr.getLeft(), data));
+        } else {
+            size -= 1;
+
+            // 0 child case
+            if (curr.getLeft() == null && curr.getRight() == null) {
+                return null;
+            }
+            
+            // 1 child case
+            if (curr.getLeft() != null && curr.getRight() == null) {
+                return curr.getLeft();
+            }
+            if (curr.getLeft() == null && curr.getRight() != null) {
+                return curr.getRight();
+            }
+
+            // 2 child case
+            BSTNode<T> dummy = new BSTNode<>(null);
+            curr.getRight().setLeft(removeSuccessor(curr.getRight(), dummy));
+            curr.setData(dummy.getData());
+        }
+
+        return curr;
+    }
+
     /**
      * Removes and returns the data from the tree matching the given parameter.
      *
@@ -84,7 +128,13 @@ public class BST<T extends Comparable<? super T>> {
      */
     public T remove(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        root = rRemove(root, data);
+
+        return data;
     }
 
     /**
