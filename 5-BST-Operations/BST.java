@@ -92,7 +92,7 @@ public class BST<T extends Comparable<? super T>> {
 
             // 2 child case
             BSTNode<T> dummy = new BSTNode<>(null);
-            curr.getRight().setLeft(removeSuccessor(curr.getRight(), dummy));
+            curr.setRight(removeSuccessor(curr.getRight(), dummy));
             curr.setData(dummy.getData());
         }
 
