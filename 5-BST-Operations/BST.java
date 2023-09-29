@@ -15,6 +15,20 @@ public class BST<T extends Comparable<? super T>> {
      * Do not add a constructor.
      */
 
+    private BSTNode<T> rAdd(BSTNode<T> curr, T data) {
+        if (curr == null) {
+            return new BSTNode<T>(data);
+        }
+        
+        if (data.compareTo(curr.getData()) > 0) {
+            curr.setRight(rAdd(curr.getRight(), data));
+        } else if (curr.getData().compareTo(data) < 0) {
+            curr.setLeft((rAdd(curr.getLeft(), data)));
+        }
+
+        return curr;
+    }
+
     /**
      * Adds the data to the tree.
      *
@@ -33,6 +47,11 @@ public class BST<T extends Comparable<? super T>> {
      */
     public void add(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        root = rAdd(root, data);
     }
 
     /**
