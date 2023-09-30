@@ -15,21 +15,6 @@ public class BST<T extends Comparable<? super T>> {
      * Do not add a constructor.
      */
 
-    private BSTNode<T> rAdd(BSTNode<T> curr, T data) {
-        if (curr == null) {
-            size += 1;
-            return new BSTNode<T>(data);
-        }
-        
-        if (data.compareTo(curr.getData()) > 0) {
-            curr.setRight(rAdd(curr.getRight(), data));
-        } else if (data.compareTo(curr.getData()) < 0) {
-            curr.setLeft(rAdd(curr.getLeft(), data));
-        }
-
-        return curr;
-    }
-
     /**
      * Adds the data to the tree.
      *
@@ -46,6 +31,21 @@ public class BST<T extends Comparable<? super T>> {
      * @param data The data to add to the tree.
      * @throws java.lang.IllegalArgumentException If data is null.
      */
+    private BSTNode<T> rAdd(BSTNode<T> curr, T data) {
+        if (curr == null) {
+            size += 1;
+            return new BSTNode<T>(data);
+        }
+        
+        if (data.compareTo(curr.getData()) > 0) {
+            curr.setRight(rAdd(curr.getRight(), data));
+        } else if (data.compareTo(curr.getData()) < 0) {
+            curr.setLeft(rAdd(curr.getLeft(), data));
+        }
+
+        return curr;
+    }
+    
     public void add(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
         if (data == null) {
@@ -54,6 +54,34 @@ public class BST<T extends Comparable<? super T>> {
 
         root = rAdd(root, data);
     }
+
+    /**
+     * Removes and returns the data from the tree matching the given parameter.
+     *
+     * This must be done recursively.
+     *
+     * There are 3 cases to consider:
+     * 1: The node containing the data is a leaf (no children). In this case,
+     * simply remove it.
+     * 2: The node containing the data has one child. In this case, simply
+     * replace it with its child.
+     * 3: The node containing the data has 2 children. Use the SUCCESSOR to
+     * replace the data. You should use recursion to find and remove the
+     * successor (you will likely need an additional helper method to
+     * handle this case efficiently).
+     *
+     * Do NOT return the same data that was passed in. Return the data that
+     * was stored in the tree.
+     *
+     * Hint: Should you use value equality or reference equality?
+     *
+     * Must be O(log n) for best and average cases and O(n) for worst case.
+     *
+     * @param data The data to remove.
+     * @return The data that was removed.
+     * @throws java.lang.IllegalArgumentException If data is null.
+     * @throws java.util.NoSuchElementException   If the data is not in the tree.
+     */
 
     private BSTNode<T> removeSuccessor(BSTNode<T> curr, BSTNode<T> dummy) {
         if (curr.getLeft() == null) {
@@ -100,33 +128,6 @@ public class BST<T extends Comparable<? super T>> {
         return curr;
     }
 
-    /**
-     * Removes and returns the data from the tree matching the given parameter.
-     *
-     * This must be done recursively.
-     *
-     * There are 3 cases to consider:
-     * 1: The node containing the data is a leaf (no children). In this case,
-     * simply remove it.
-     * 2: The node containing the data has one child. In this case, simply
-     * replace it with its child.
-     * 3: The node containing the data has 2 children. Use the SUCCESSOR to
-     * replace the data. You should use recursion to find and remove the
-     * successor (you will likely need an additional helper method to
-     * handle this case efficiently).
-     *
-     * Do NOT return the same data that was passed in. Return the data that
-     * was stored in the tree.
-     *
-     * Hint: Should you use value equality or reference equality?
-     *
-     * Must be O(log n) for best and average cases and O(n) for worst case.
-     *
-     * @param data The data to remove.
-     * @return The data that was removed.
-     * @throws java.lang.IllegalArgumentException If data is null.
-     * @throws java.util.NoSuchElementException   If the data is not in the tree.
-     */
     public T remove(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
         if (data == null) {
