@@ -65,17 +65,18 @@ public class BST<T extends Comparable<? super T>> {
         return curr;
     }
 
-    private BSTNode<T> rRemove(BSTNode<T> curr, T data) {
+    private BSTNode<T> rRemove(BSTNode<T> curr, T data, BSTNode<T> dummy) {
         if (curr == null) {
             throw new NoSuchElementException();
         }
         
         if (data.compareTo(curr.getData()) > 0) {
-            curr.setRight(rRemove(curr.getRight(), data));
+            curr.setRight(rRemove(curr.getRight(), data, dummy));
         } else if (data.compareTo(curr.getData()) < 0) {
-            curr.setLeft(rRemove(curr.getLeft(), data));
+            curr.setLeft(rRemove(curr.getLeft(), data, dummy));
         } else {
             size -= 1;
+            dummy.setData(curr.getData());
 
             // 0 child case
             if (curr.getLeft() == null && curr.getRight() == null) {
@@ -91,9 +92,9 @@ public class BST<T extends Comparable<? super T>> {
             }
 
             // 2 child case
-            BSTNode<T> dummy = new BSTNode<>(null);
-            curr.setRight(removeSuccessor(curr.getRight(), dummy));
-            curr.setData(dummy.getData());
+            BSTNode<T> dummySuccessor = new BSTNode<>(null);
+            curr.setRight(removeSuccessor(curr.getRight(), dummySuccessor));
+            curr.setData(dummySuccessor.getData());
         }
 
         return curr;
@@ -132,9 +133,10 @@ public class BST<T extends Comparable<? super T>> {
             throw new IllegalArgumentException();
         }
 
-        root = rRemove(root, data);
+        BSTNode<T> dummy = new BSTNode<>(null);
+        root = rRemove(root, data, dummy);
 
-        return data;
+        return dummy.getData();
     }
 
     /**
