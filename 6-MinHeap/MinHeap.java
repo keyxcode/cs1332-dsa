@@ -56,10 +56,12 @@ public class MinHeap<T extends Comparable<? super T>> {
             throw new IllegalArgumentException();
         }
 
-        if (backingArray.length == size - 1) {
-            backingArray = getExtendedArray();  
+        if (backingArray.length == size + 1) {
+            backingArray = getExtendedArray();
         }
 
+        size += 1;
+        backingArray[size] = data;
     }
 
     /**
