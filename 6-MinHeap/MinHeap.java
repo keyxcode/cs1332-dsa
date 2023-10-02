@@ -38,8 +38,28 @@ public class MinHeap<T extends Comparable<? super T>> {
      * @param data The data to add.
      * @throws java.lang.IllegalArgumentException If the data is null.
      */
+    private T[] getExtendedArray() {
+        int currentCapacity = backingArray.length;
+        int newCapacity = currentCapacity * 2;
+        T[] newArray = (T[]) new Comparable[newCapacity];
+
+        for (int i = 0; i < currentCapacity; i++) {
+            newArray[i] = backingArray[i];
+        }
+
+        return newArray;
+    }
+
     public void add(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (backingArray.length == size - 1) {
+            backingArray = getExtendedArray();  
+        }
+
     }
 
     /**
