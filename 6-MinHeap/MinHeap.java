@@ -91,7 +91,42 @@ public class MinHeap<T extends Comparable<? super T>> {
      */
     public T remove() {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+
+        T data = backingArray[1];
+        T replacement = backingArray[size];
+        backingArray[1] = replacement;
+        backingArray[size] = null;
+        size -= 1;
+
+        int currDataIdx = 1;
+        while (currDataIdx * 2 <= size) {
+            int child1Idx = currDataIdx * 2;
+            int child2Idx = currDataIdx * 2 + 1;
+            T child1 = backingArray[child1Idx];
+            T child2 = backingArray[child2Idx];
+            
+            int smallerChildIdx;
+            if (child2 == null || child1.compareTo(child2) < 0) {
+                smallerChildIdx = child1Idx;
+            } else {
+                smallerChildIdx = child2Idx;
+            } 
+            
+            if (replacement.compareTo(backingArray[smallerChildIdx]) < 0) {
+                break;
+            }
+
+            T temp = backingArray[smallerChildIdx];
+            backingArray[smallerChildIdx] = replacement;
+            backingArray[currDataIdx] = temp;
+
+            currDataIdx = smallerChildIdx;
+        }
+
+        return data;
     }
 
     /**
