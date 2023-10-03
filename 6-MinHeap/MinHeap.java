@@ -62,6 +62,21 @@ public class MinHeap<T extends Comparable<? super T>> {
 
         size += 1;
         backingArray[size] = data;
+        int currDataIdx = size;
+
+        while (currDataIdx > 1) {
+            int parentIdx = currDataIdx / 2;
+            
+            if (backingArray[parentIdx].compareTo(data) < 0) {
+                break;
+            }
+
+            T temp = backingArray[parentIdx];
+            backingArray[parentIdx] = data;
+            backingArray[currDataIdx] = temp;
+
+            currDataIdx = parentIdx;
+        }
     }
 
     /**
