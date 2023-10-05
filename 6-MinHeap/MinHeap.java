@@ -60,13 +60,16 @@ public class MinHeap<T extends Comparable<? super T>> {
             backingArray = getExtendedArray();
         }
 
+        // put new data at the end of the array
         size += 1;
         backingArray[size] = data;
         int currDataIdx = size;
 
+        // up heap
         while (currDataIdx > 1) {
             int parentIdx = currDataIdx / 2;
             
+            // if newly added data < its parent's data => done
             if (backingArray[parentIdx].compareTo(data) < 0) {
                 break;
             }
@@ -95,12 +98,14 @@ public class MinHeap<T extends Comparable<? super T>> {
             throw new NoSuchElementException();
         }
 
+        // remove top of the heap and replace it with last element in the array
         T data = backingArray[1];
         T replacement = backingArray[size];
         backingArray[1] = replacement;
         backingArray[size] = null;
         size -= 1;
 
+        // down heap
         int currDataIdx = 1;
         while (currDataIdx * 2 <= size) {
             int child1Idx = currDataIdx * 2;
@@ -115,6 +120,7 @@ public class MinHeap<T extends Comparable<? super T>> {
                 smallerChildIdx = child2Idx;
             } 
             
+            // if the replacement data < its smaller child's data => done
             if (replacement.compareTo(backingArray[smallerChildIdx]) < 0) {
                 break;
             }
