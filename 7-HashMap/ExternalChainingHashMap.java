@@ -69,9 +69,53 @@ public class ExternalChainingHashMap<K, V> {
      *         map, return the old value associated with it.
      * @throws java.lang.IllegalArgumentException If key or value is null.
      */
+    private int currentLoadFactor() {
+        return size / table.length;
+    }
+
     public V put(K key, V value) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        if (key == null || value == null) {
+            throw new IllegalArgumentException();
+        }
+
+        int compressedHash = key.hashCode() % table.length;
+        ExternalChainingMapEntry<K, V> entry = new ExternalChainingMapEntry<>(key, value);
+
+        // hashed index is null
+        if (table[compressedHash] == null) {
+            size += 1;
+            if (currentLoadFactor() > MAX_LOAD_FACTOR) {
+                resizeBackingTable(2 * table.length + 1);
+                compressedHash = key.hashCode() % table.length;
+            }
+            
+            table[compressedHash] = entry;
+            return null;
+        }
+
+        // hashed index is not null
+        ExternalChainingMapEntry<K, V> curr = table[compressedHash];
+
+        while (curr != null) {
+            // key already exists in the table
+            if (curr.getValue().equals(value)) {
+                V oldValue = curr.getValue();
+                curr.setValue(value);
+                return oldValue;
+            }
+
+            curr = curr.getNext();
+        }
+        
+        // key doesn't exist in the table
+        size += 1;
+        if (currentLoadFactor() > MAX_LOAD_FACTOR) {
+            resizeBackingTable(2 * table.length + 1);
+            compressedHash = key.hashCode() % table.length;
+        }
+        table[compressedHash] = entry;
+        return null;
     }
 
     /**
