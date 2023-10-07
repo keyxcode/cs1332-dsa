@@ -73,6 +73,23 @@ public class ExternalChainingHashMap<K, V> {
         return size / table.length;
     }
 
+    private ExternalChainingMapEntry<K, V> get(K key) {
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+                
+        int compressedHash = key.hashCode() % table.length;
+
+        ExternalChainingMapEntry<K, V> curr = table[compressedHash];
+        while (curr != null) {
+            if (curr.getKey().equals(key)) {
+                return curr;
+            }
+        }
+ 
+        return null;
+    }
+
     public V put(K key, V value) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
         if (key == null || value == null) {
