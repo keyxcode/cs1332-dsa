@@ -158,12 +158,34 @@ public class ExternalChainingHashMap<K, V> {
         }
 
         ExternalChainingMapEntry<K, V> entry = get(key);
+        
+        // key not in the map
         if (entry == null) {
             throw new NoSuchElementException();
         }
 
+        // key is in the map
         size -= 1;
         int compressedHash = getCompressedHash(key);
+        ExternalChainingMapEntry<K, V> curr = table[compressedHash];
+
+        // entry is the only the chain
+        if (curr.getNext() == null) {
+            table[compressedHash] = null;
+        }
+
+        // entry is the first in the chain
+        if (curr == entry) {
+            table[compressedHash] = curr.getNext();
+        }
+
+        // entry is found later in the chain
+        while (curr.getNext() != null) {
+            if (curr.getNext() == entry) {
+                curr.setNext(curr.getNext().getNext());
+                break;
+            }
+        }
 
         return entry.getValue();
     }
