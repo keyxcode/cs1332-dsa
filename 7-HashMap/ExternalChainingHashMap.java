@@ -70,8 +70,8 @@ public class ExternalChainingHashMap<K, V> {
      *         map, return the old value associated with it.
      * @throws java.lang.IllegalArgumentException If key or value is null.
      */
-    private int currentLoadFactor() {
-        return size / table.length;
+    private double currentLoadFactor() {
+        return size * 1.0 / table.length;
     }
 
     private int getCompressedHash(K key) {
