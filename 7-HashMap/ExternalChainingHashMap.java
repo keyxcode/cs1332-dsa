@@ -1,3 +1,4 @@
+import java.io.Externalizable;
 import java.util.NoSuchElementException;
 
 /**
@@ -209,6 +210,20 @@ public class ExternalChainingHashMap<K, V> {
      */
     private void resizeBackingTable(int length) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        int currentTableLength = table.length;
+        ExternalChainingMapEntry<K, V>[] newTable = (ExternalChainingMapEntry<K, V>[]) new ExternalChainingMapEntry[length];
+
+        for (int i = 0; i < currentTableLength; i++) {
+            ExternalChainingMapEntry<K, V> entry = table[currentTableLength];
+            
+            ExternalChainingMapEntry<K, V> curr = entry;
+            while (curr != null) {
+                int newCompressedHash = entry.getKey().hashCode() % length;
+                newTable[newCompressedHash] = entry;
+            }
+        }
+        
+        table = newTable;
     }
 
     /**
