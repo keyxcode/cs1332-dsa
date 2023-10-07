@@ -145,7 +145,16 @@ public class ExternalChainingHashMap<K, V> {
      */
     public V remove(K key) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        throw new NoSuchElementException();
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+
+        ExternalChainingMapEntry<K, V> entry = get(key);
+        if (entry == null) {
+            throw new NoSuchElementException();
+        }
+
+        return entry.getValue();
     }
 
     /**
