@@ -105,43 +105,35 @@ public class ExternalChainingHashMap<K, V> {
             throw new IllegalArgumentException();
         }
 
-        int compressedHash = key.hashCode() % table.length;
-        ExternalChainingMapEntry<K, V> entry = new ExternalChainingMapEntry<>(key, value);
+        ExternalChainingMapEntry<K, V> entry = get(key);
+        
+        // key already in the map
+        if (entry != null) {
+            V oldValue = entry.getValue();
+            entry.setValue(value);
+            return oldValue;
+        }
 
-        // hashed index is null
-        if (table[compressedHash] == null) {
-            size += 1;
-            if (currentLoadFactor() > MAX_LOAD_FACTOR) {
-                resizeBackingTable(2 * table.length + 1);
-                compressedHash = key.hashCode() % table.length;
-            }
-            
+        // key not in the map
+        size += 1;
+        if (currentLoadFactor() > MAX_LOAD_FACTOR) {
+            resizeBackingTable(2 * table.length + 1);
+        }
+
+        int compressedHash = key.hashCode() % table.length;
+        entry = new ExternalChainingMapEntry<>(key, value);
+
+        // no chain has exists at this index
+        if (table[compressedHash] == null) {            
             table[compressedHash] = entry;
             return null;
         }
 
-        // hashed index is not null
-        ExternalChainingMapEntry<K, V> curr = table[compressedHash];
-
-        while (curr != null) {
-            // key already exists in the table
-            if (curr.getValue().equals(value)) {
-                V oldValue = curr.getValue();
-                curr.setValue(value);
-                return oldValue;
-            }
-
-            curr = curr.getNext();
-        }
-        
-        // key doesn't exist in the table
-        size += 1;
-        if (currentLoadFactor() > MAX_LOAD_FACTOR) {
-            resizeBackingTable(2 * table.length + 1);
-            compressedHash = key.hashCode() % table.length;
-        }
+        // a chain exists at this index
+        entry.setNext(table[compressedHash]);
         table[compressedHash] = entry;
         return null;
+        
     }
 
     /**
