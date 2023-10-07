@@ -73,16 +73,24 @@ public class ExternalChainingHashMap<K, V> {
         return size / table.length;
     }
 
+    private int getCompressedHash(K key) {
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+
+        return key.hashCode() % table.length;
+    }
+
     private ExternalChainingMapEntry<K, V> get(K key) {
         if (key == null) {
             throw new IllegalArgumentException();
         }
                 
-        int compressedHash = key.hashCode() % table.length;
+        int compressedHash = getCompressedHash(key);
 
         ExternalChainingMapEntry<K, V> curr = table[compressedHash];
         while (curr != null) {
-            if (curr.getKey().equals(key)) {
+            if (curr.getKey() == key) {
                 return curr;
             }
         }
@@ -153,6 +161,9 @@ public class ExternalChainingHashMap<K, V> {
         if (entry == null) {
             throw new NoSuchElementException();
         }
+
+        size -= 1;
+        int compressedHash = getCompressedHash(key);
 
         return entry.getValue();
     }
