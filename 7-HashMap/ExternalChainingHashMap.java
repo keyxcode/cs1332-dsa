@@ -1,4 +1,5 @@
 import java.util.NoSuchElementException;
+import java.lang.Math;
 
 /**
  * Your implementation of a ExternalChainingHashMap.
@@ -78,7 +79,7 @@ public class ExternalChainingHashMap<K, V> {
             throw new IllegalArgumentException();
         }
 
-        return key.hashCode() % table.length;
+        return Math.abs(key.hashCode() % table.length);
     }
 
     private ExternalChainingMapEntry<K, V> get(K key) {
