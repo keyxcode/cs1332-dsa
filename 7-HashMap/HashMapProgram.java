@@ -6,7 +6,6 @@ public class HashMapProgram {
 
         myMap.getTable()[5] = new ExternalChainingMapEntry<Integer,Integer>(5, 5);
         System.out.println(Arrays.toString(myMap.getTable()));
-        System.out.println(myMap.get(5));
 
         myMap.put(0, 0);
         myMap.put(1, 1);
@@ -32,7 +31,6 @@ public class HashMapProgram {
         myMap.put(2, 5);
         System.out.println(Arrays.toString(myMap.getTable()));
         myMap.put(54, 54);
-        System.out.println(Arrays.toString(myMap.getTable()));
-        System.out.println(myMap.get(54).getNext());
+        System.out.println(myMap.getTable()[0].getNext());
     }    
 }

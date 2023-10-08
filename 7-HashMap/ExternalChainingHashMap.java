@@ -81,7 +81,7 @@ public class ExternalChainingHashMap<K, V> {
         return key.hashCode() % table.length;
     }
 
-    public ExternalChainingMapEntry<K, V> get(K key) {
+    private ExternalChainingMapEntry<K, V> get(K key) {
         if (key == null) {
             throw new IllegalArgumentException();
         }
@@ -209,8 +209,6 @@ public class ExternalChainingHashMap<K, V> {
         for (int i = 0; i < currentTableLength; i++) {
             // get the entry in the old table
             ExternalChainingMapEntry<K, V> curr = table[i];
-
-            System.out.println(curr);
 
             // loop through any possible external chain and put data in the new table
             while (curr != null) {
