@@ -122,7 +122,7 @@ public class ExternalChainingHashMap<K, V> {
             resizeBackingTable(2 * table.length + 1);
         }
 
-        int compressedHash = key.hashCode() % table.length;
+        int compressedHash = getCompressedHash(key);
         entry = new ExternalChainingMapEntry<>(key, value);
 
         // no chain has exists at this index
@@ -213,7 +213,7 @@ public class ExternalChainingHashMap<K, V> {
 
             // loop through any possible external chain and put data in the new table
             while (curr != null) {
-                int newCompressedHash = curr.getKey().hashCode() % length;
+                int newCompressedHash = getCompressedHash(curr.getKey());
                 newTable[newCompressedHash] = curr;
                 
                 curr = curr.getNext();
