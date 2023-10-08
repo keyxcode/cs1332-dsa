@@ -74,12 +74,12 @@ public class ExternalChainingHashMap<K, V> {
         return size * 1.0 / table.length;
     }
 
-    private int getCompressedHash(K key) {
+    private int getCompressedHash(K key, int length) {
         if (key == null) {
             throw new IllegalArgumentException();
         }
 
-        return Math.abs(key.hashCode() % table.length);
+        return Math.abs(key.hashCode() % length);
     }
 
     private ExternalChainingMapEntry<K, V> get(K key) {
@@ -87,7 +87,7 @@ public class ExternalChainingHashMap<K, V> {
             throw new IllegalArgumentException();
         }
         
-        int compressedHash = getCompressedHash(key);
+        int compressedHash = getCompressedHash(key, table.length);
 
         ExternalChainingMapEntry<K, V> curr = table[compressedHash];
         while (curr != null) {
@@ -122,7 +122,7 @@ public class ExternalChainingHashMap<K, V> {
             resizeBackingTable(2 * table.length + 1);
         }
 
-        int compressedHash = getCompressedHash(key);
+        int compressedHash = getCompressedHash(key, table.length);
         entry = new ExternalChainingMapEntry<>(key, value);
 
         // no chain has exists at this index
@@ -161,7 +161,7 @@ public class ExternalChainingHashMap<K, V> {
 
         // key is in the map
         size -= 1;
-        int compressedHash = getCompressedHash(key);
+        int compressedHash = getCompressedHash(key, table.length);
         ExternalChainingMapEntry<K, V> curr = table[compressedHash];
 
         // entry is the only the chain
@@ -213,7 +213,7 @@ public class ExternalChainingHashMap<K, V> {
 
             // loop through any possible external chain and put data in the new table
             while (curr != null) {
-                int newCompressedHash = getCompressedHash(curr.getKey());
+                int newCompressedHash = getCompressedHash(curr.getKey(), length);
                 newTable[newCompressedHash] = curr;
                 
                 curr = curr.getNext();
