@@ -1,4 +1,3 @@
-import java.io.Externalizable;
 import java.util.NoSuchElementException;
 
 /**
@@ -82,11 +81,11 @@ public class ExternalChainingHashMap<K, V> {
         return key.hashCode() % table.length;
     }
 
-    private ExternalChainingMapEntry<K, V> get(K key) {
+    public ExternalChainingMapEntry<K, V> get(K key) {
         if (key == null) {
             throw new IllegalArgumentException();
         }
-                
+        
         int compressedHash = getCompressedHash(key);
 
         ExternalChainingMapEntry<K, V> curr = table[compressedHash];
@@ -94,6 +93,8 @@ public class ExternalChainingHashMap<K, V> {
             if (curr.getKey() == key) {
                 return curr;
             }
+
+            curr = curr.getNext();
         }
  
         return null;
@@ -206,12 +207,17 @@ public class ExternalChainingHashMap<K, V> {
         ExternalChainingMapEntry<K, V>[] newTable = (ExternalChainingMapEntry<K, V>[]) new ExternalChainingMapEntry[length];
 
         for (int i = 0; i < currentTableLength; i++) {
-            ExternalChainingMapEntry<K, V> entry = table[currentTableLength];
-            
-            ExternalChainingMapEntry<K, V> curr = entry;
+            // get the entry in the old table
+            ExternalChainingMapEntry<K, V> curr = table[i];
+
+            System.out.println(curr);
+
+            // loop through any possible external chain and put data in the new table
             while (curr != null) {
-                int newCompressedHash = entry.getKey().hashCode() % length;
-                newTable[newCompressedHash] = entry;
+                int newCompressedHash = curr.getKey().hashCode() % length;
+                newTable[newCompressedHash] = curr;
+                
+                curr = curr.getNext();
             }
         }
         
