@@ -23,5 +23,16 @@ public class HashMapProgram {
         myMap.put(11, 11);
         myMap.put(12, 12);
         System.out.println(Arrays.toString(myMap.getTable()));
+
+        myMap.remove(1);
+        System.out.println(Arrays.toString(myMap.getTable()));
+
+        myMap.put(24, 24);
+        System.out.println(Arrays.toString(myMap.getTable()));
+        myMap.put(2, 5);
+        System.out.println(Arrays.toString(myMap.getTable()));
+        myMap.put(54, 54);
+        System.out.println(Arrays.toString(myMap.getTable()));
+        System.out.println(myMap.get(54).getNext());
     }    
 }
