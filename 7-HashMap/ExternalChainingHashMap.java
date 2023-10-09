@@ -122,20 +122,19 @@ public class ExternalChainingHashMap<K, V> {
             resizeBackingTable(2 * table.length + 1);
         }
 
+        ExternalChainingMapEntry<K, V> newEntry = new ExternalChainingMapEntry<>(key, value);
         int compressedHash = getCompressedHash(key, table.length);
-        entry = new ExternalChainingMapEntry<>(key, value);
 
         // no chain has exists at this index
         if (table[compressedHash] == null) {            
-            table[compressedHash] = entry;
+            table[compressedHash] = newEntry;
             return null;
         }
 
         // a chain exists at this index
-        entry.setNext(table[compressedHash]);
+        newEntry.setNext(table[compressedHash]);
         table[compressedHash] = entry;
         return null;
-        
     }
 
     /**
@@ -164,13 +163,8 @@ public class ExternalChainingHashMap<K, V> {
         int compressedHash = getCompressedHash(key, table.length);
         ExternalChainingMapEntry<K, V> curr = table[compressedHash];
 
-        // entry is the only the chain
-        if (curr.getNext() == null) {
-            table[compressedHash] = null;
-        }
-
-        // entry is the first in the chain
-        if (curr == entry) {
+        // entry is the first in the chain or the only in the chain
+        if (curr == entry || curr.getNext() == null) {
             table[compressedHash] = curr.getNext();
         }
 
