@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class HashMapProgram {
     public static void main(String[] args) {
         ExternalChainingHashMap<Integer, Integer> myMap = new ExternalChainingHashMap<>();
@@ -12,19 +10,16 @@ public class HashMapProgram {
         myMap.put(5, 5);
         myMap.put(19, 19);
         myMap.put(218, 218);
-        System.out.println(Arrays.toString(myMap.getTable()));
+        System.out.println(myMap);
 
         myMap.put(1, 1);
-        System.out.println(Arrays.toString(myMap.getTable()));
+        System.out.println(myMap);
+        myMap.put(28, 28);
+        System.out.println(myMap);
+        myMap.put(55, 55);
+        System.out.println(myMap);
 
-        // myMap.remove(1);
-        // System.out.println(Arrays.toString(myMap.getTable()));
-
-        // myMap.put(24, 24);
-        // System.out.println(Arrays.toString(myMap.getTable()));
-        // myMap.put(2, 5);
-        // System.out.println(Arrays.toString(myMap.getTable()));
-        // myMap.put(54, 54);
-        // System.out.println(myMap.getTable()[0].getNext());
+        myMap.remove(28);
+        System.out.println(myMap);
     }    
 }

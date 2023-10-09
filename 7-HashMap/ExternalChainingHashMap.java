@@ -180,6 +180,8 @@ public class ExternalChainingHashMap<K, V> {
                 curr.setNext(curr.getNext().getNext());
                 break;
             }
+
+            curr = curr.getNext();
         }
 
         return entry.getValue();
@@ -247,5 +249,29 @@ public class ExternalChainingHashMap<K, V> {
     public int size() {
         // DO NOT MODIFY THIS METHOD!
         return size;
+    }
+
+    public String toString() {
+        String mapRepr = "[\n";
+        int length = table.length;
+
+        for (int i = 0; i < length; i++) {
+            mapRepr += table[i];
+
+            if (table[i] == null) {
+                mapRepr += "\n";
+                continue;
+            }
+
+            ExternalChainingMapEntry<K, V> next = table[i].getNext();
+            while (next != null) {
+                mapRepr += " -> " + next;
+                next = next.getNext();
+            }
+
+            mapRepr += "\n";
+        }
+
+        return mapRepr + "]";
     }
 }
