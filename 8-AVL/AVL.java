@@ -28,6 +28,11 @@ public class AVL<T extends Comparable<? super T>> {
      * @param currentNode The node to update the height and balance factor of.
      */
     public void updateHeightAndBF(AVLNode<T> currentNode) {
+        int leftHeight = currentNode.getLeft().getHeight();
+        int rightHeight = currentNode.getRight().getHeight();
+
+        currentNode.setHeight(Math.max(leftHeight, rightHeight) + 1);
+        currentNode.setBalanceFactor(leftHeight - rightHeight);
     }
 
     /**
