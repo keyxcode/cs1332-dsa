@@ -123,6 +123,36 @@ public class AVL<T extends Comparable<? super T>> {
      */
     public AVLNode<T> balance(AVLNode<T> currentNode) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        return null;
+        updateHeightAndBF(currentNode);
+        int balanceFactor = currentNode.getBalanceFactor();
+        
+        // no rotation
+        if (Math.abs(balanceFactor) < 1) {
+            return currentNode;
+        }
+        
+        // right heavy
+        if (balanceFactor < 0) {
+            AVLNode<T> rightChild = currentNode.getRight();
+            if (rightChild.getBalanceFactor() < 0) {
+                // single left rotation
+                return rotateLeft(currentNode);
+            } else {
+                // right left rotation
+                currentNode.setRight(rotateRight(rightChild));
+                return rotateLeft(currentNode);
+            }
+        } 
+
+        // left heavy (balanceFactor > 0)
+        AVLNode<T> leftChild = currentNode.getLeft();
+        if (leftChild.getBalanceFactor() > 0) {
+            // single right rotation
+            return rotateRight(currentNode);
+        } else {
+            // left right rotation
+            currentNode.setLeft(rotateLeft(leftChild));
+            return rotateRight(currentNode);
+        }
     }
 }
