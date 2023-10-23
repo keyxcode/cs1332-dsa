@@ -24,8 +24,10 @@ public class Sorting {
      * @param arr        The array that must be sorted after the method runs.
      * @param comparator The Comparator used to compare the data in arr.
      */
-    public static <T> void bubbleSort(T[] arr, Comparator<T> comparator) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+    private static <T> void swap(T[] arr, int idx1, int idx2) {
+        T temp = arr[idx1];
+        arr[idx1] = arr[idx2];
+        arr[idx2] = temp;
     }
 
     /**
