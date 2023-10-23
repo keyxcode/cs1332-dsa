@@ -22,4 +22,11 @@ public class SortingTest {
         Sorting.bubbleSort(intArray, new AscendingComparator());
         assertArrayEquals(intArray, new Integer[] {0,1,2,3,4,5});
     }
+
+    @Test
+    public void SelectionSortTest() {
+        Integer[] intArray = {0,2,1,3,4,5}; 
+        Sorting.selectionSort(intArray, new AscendingComparator());
+        assertArrayEquals(intArray, new Integer[] {0,1,2,3,4,5});
+    }
 }

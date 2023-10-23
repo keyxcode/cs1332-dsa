@@ -69,6 +69,17 @@ public class Sorting {
      */
     public static <T> void selectionSort(T[] arr, Comparator<T> comparator) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        for (int stopIdx = arr.length - 1; stopIdx > 0; stopIdx--) {
+            int maxIdx = 0;
+
+            for (int i = 1; i <= stopIdx; i++) {
+                if (comparator.compare(arr[i], arr[maxIdx]) > 0) {
+                    maxIdx = i;
+                }
+            }
+
+            swap(arr, stopIdx, maxIdx);
+        }
     }
 
     /**
