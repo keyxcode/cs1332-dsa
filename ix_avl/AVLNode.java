@@ -1,3 +1,4 @@
+package ix_avl;
 /**
  * Node class used for implementing the AVL.
  *

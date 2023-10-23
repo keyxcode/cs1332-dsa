@@ -1,3 +1,4 @@
+package x_iterativesorts;
 import java.util.Comparator;
 
 /**
@@ -28,6 +29,25 @@ public class Sorting {
         T temp = arr[idx1];
         arr[idx1] = arr[idx2];
         arr[idx2] = temp;
+    }
+
+    public static <T> void bubbleSort(T[] arr, Comparator<T> comparator) {
+        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        int stopIdx = arr.length - 1;
+
+        while (stopIdx > 0) {
+            int innerLoopLimit = stopIdx;
+            
+            for (int i = 0; i < stopIdx; i++) {
+                if (comparator.compare(arr[i], arr[i + 1]) > 0) {
+                    swap(arr, i, i + 1);
+                    innerLoopLimit = i;
+                }
+                
+                stopIdx = innerLoopLimit;
+            }
+            stopIdx -= 1;
+        }
     }
 
     /**
