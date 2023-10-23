@@ -34,19 +34,18 @@ public class Sorting {
     public static <T> void bubbleSort(T[] arr, Comparator<T> comparator) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
         int stopIdx = arr.length - 1;
-
-        while (stopIdx > 0) {
-            int innerLoopLimit = stopIdx;
+        
+        while (stopIdx > 0) {            
+            int lastSwappedIdx = 0;
             
             for (int i = 0; i < stopIdx; i++) {
                 if (comparator.compare(arr[i], arr[i + 1]) > 0) {
                     swap(arr, i, i + 1);
-                    innerLoopLimit = i;
+                    lastSwappedIdx = i;
                 }
-                
-                stopIdx = innerLoopLimit;
             }
-            stopIdx -= 1;
+
+            stopIdx = lastSwappedIdx;
         }
     }
 

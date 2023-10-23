@@ -17,9 +17,9 @@ public class SortingTest {
     }
 
     @Test
-    public void IterativeSortTest() {
-        Integer[] intArray = {0,1,2}; 
+    public void BubbleSortTest() {
+        Integer[] intArray = {0,2,1,3,4,5}; 
         Sorting.bubbleSort(intArray, new AscendingComparator());
-        assertArrayEquals(intArray, new Integer[] {0,1,2});
+        assertArrayEquals(intArray, new Integer[] {0,1,2,3,4,5});
     }
 }
