@@ -29,4 +29,11 @@ public class SortingTest {
         Sorting.selectionSort(intArray, new AscendingComparator());
         assertArrayEquals(intArray, new Integer[] {0,1,2,3,4,5});
     }
+
+    @Test
+    public void InsertionSortTest() {
+        Integer[] intArray = {0,4,1,3,2,5}; 
+        Sorting.insertionSort(intArray, new AscendingComparator());
+        assertArrayEquals(intArray, new Integer[] {0,1,2,3,4,5});
+    }
 }
