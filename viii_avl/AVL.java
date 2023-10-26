@@ -28,8 +28,11 @@ public class AVL<T extends Comparable<? super T>> {
      * @param currentNode The node to update the height and balance factor of.
      */
     public void updateHeightAndBF(AVLNode<T> currentNode) {
-        int leftHeight = currentNode.getLeft().getHeight();
-        int rightHeight = currentNode.getRight().getHeight();
+        AVLNode<T> leftChild = currentNode.getLeft();
+        AVLNode<T> rightChild = currentNode.getRight();
+
+        int leftHeight = leftChild == null ? -1 : leftChild.getHeight();
+        int rightHeight = rightChild == null ? -1 : rightChild.getHeight();
 
         currentNode.setHeight(Math.max(leftHeight, rightHeight) + 1);
         currentNode.setBalanceFactor(leftHeight - rightHeight);
@@ -121,38 +124,60 @@ public class AVL<T extends Comparable<? super T>> {
      * @param cur The current node under inspection.
      * @return The AVLNode that the caller should return.
      */
+    // public AVLNode<T> balance(AVLNode<T> currentNode) {
+    //     // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+    //     updateHeightAndBF(currentNode);
+    //     int balanceFactor = currentNode.getBalanceFactor();
+        
+    //     // no rotation
+    //     if (Math.abs(balanceFactor) < 1) {
+    //         return currentNode;
+    //     }
+        
+    //     // right heavy
+    //     if (balanceFactor < 0) {
+    //         AVLNode<T> rightChild = currentNode.getRight();
+    //         if (rightChild.getBalanceFactor() < 0) {
+    //             // single left rotation
+    //             return rotateLeft(currentNode);
+    //         } else {
+    //             // right left rotation
+    //             currentNode.setRight(rotateRight(rightChild));
+    //             return rotateLeft(currentNode);
+    //         }
+    //     } 
+
+    //     // left heavy (balanceFactor > 0)
+    //     AVLNode<T> leftChild = currentNode.getLeft();
+    //     if (leftChild.getBalanceFactor() > 0) {
+    //         // single right rotation
+    //         return rotateRight(currentNode);
+    //     } else {
+    //         // left right rotation
+    //         currentNode.setLeft(rotateLeft(leftChild));
+    //         return rotateRight(currentNode);
+    //     }
+    // }
+
     public AVLNode<T> balance(AVLNode<T> currentNode) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+
+        /* First, we update the height and balance factor of the current node. */
         updateHeightAndBF(currentNode);
         int balanceFactor = currentNode.getBalanceFactor();
-        
-        // no rotation
-        if (Math.abs(balanceFactor) < 1) {
-            return currentNode;
-        }
-        
-        // right heavy
-        if (balanceFactor < 0) {
-            AVLNode<T> rightChild = currentNode.getRight();
-            if (rightChild.getBalanceFactor() < 0) {
-                // single left rotation
-                return rotateLeft(currentNode);
-            } else {
-                // right left rotation
-                currentNode.setRight(rotateRight(rightChild));
-                return rotateLeft(currentNode);
-            }
-        } 
 
-        // left heavy (balanceFactor > 0)
-        AVLNode<T> leftChild = currentNode.getLeft();
-        if (leftChild.getBalanceFactor() > 0) {
-            // single right rotation
-            return rotateRight(currentNode);
-        } else {
-            // left right rotation
-            currentNode.setLeft(rotateLeft(leftChild));
-            return rotateRight(currentNode);
+        if (balanceFactor < 0) {
+            if (currentNode.getRight().getBalanceFactor() > 0) {
+                currentNode.setRight(rotateRight(currentNode.getRight()));
+            }
+            currentNode = rotateLeft(currentNode);
+        } else if (balanceFactor > 0) {
+            if (currentNode.getLeft().getBalanceFactor() < 0) {
+                currentNode.setLeft(rotateLeft(currentNode.getLeft()));
+            }
+            currentNode = rotateRight(currentNode);
         }
+
+        return currentNode;
     }
 }
