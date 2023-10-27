@@ -23,16 +23,21 @@ public class AVLProgram {
         myAVL.add(6);
         myAVL.add(7);
         System.out.println(myAVL);
-        AVLNode<Integer> newRoot = myAVL.getRoot();
-        System.out.println(newRoot.getLeft().getData());
-        System.out.println(newRoot.getRight().getData());
-        System.out.println(newRoot.getRight().getLeft().getData());
-        System.out.println(newRoot.getRight().getRight().getData());
+        root = myAVL.getRoot();
+        System.out.println(root.getLeft().getData());
+        System.out.println(root.getRight().getData());
+        System.out.println(root.getRight().getLeft().getData());
+        System.out.println(root.getRight().getRight().getData());
 
-        // myAVL.remove(5);
-        // System.out.println(myAVL);
-        // System.out.println(root.getLeft().getData());
-        // System.out.println(root.getRight().getData());
+        myAVL.remove(2);
+        System.out.println(myAVL);
+        root = myAVL.getRoot();
+        System.out.println(root.getLeft().getData());
+        System.out.println(root.getLeft().getLeft());
+        System.out.println(root.getLeft().getRight().getData());
+        System.out.println(root.getRight().getData());
+        // System.out.println(root.getRight().getLeft());
+        // System.out.println(root.getRight().getRight().getData());
 
         // myAVL.remove(4);
         // System.out.println(myAVL);

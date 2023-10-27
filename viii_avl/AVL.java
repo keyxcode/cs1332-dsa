@@ -95,12 +95,12 @@ public class AVL<T extends Comparable<? super T>> {
         }
 
         curr.setLeft(removeSuccessor(curr.getLeft(), dummy));
-        return curr;
+        return balance(curr);
     }
 
     private AVLNode<T> rRemove(AVLNode<T> curr, T data, AVLNode<T> dummy) {
         if (curr == null) {
-            return null;
+            throw new NoSuchElementException();
         }
 
         if (data.compareTo(curr.getData()) < 0) {
@@ -111,23 +111,26 @@ public class AVL<T extends Comparable<? super T>> {
             size -= 1;
             dummy.setData(curr.getData());
 
+            // 0 child case
             if (curr.getLeft() == null && curr.getRight() == null) {
                 return null;
             }
-            if (curr.getLeft() != null || curr.getRight() == null) {
+
+            // 1 child case
+            if (curr.getLeft() != null && curr.getRight() == null) {
                 return curr.getLeft();
             }
-            if (curr.getLeft() == null || curr.getRight() != null) {
+            if (curr.getLeft() == null && curr.getRight() != null) {
                 return curr.getRight();
             }
 
-            // 2-child case
+            // 2 child case
             AVLNode<T> successorDummy = new AVLNode<T>(null);
             curr.setRight(removeSuccessor(curr.getRight(), successorDummy));
             curr.setData(successorDummy.getData());
         }
 
-        return curr;
+        return balance(curr);
     }
 
     public T remove(T data) {
@@ -138,10 +141,6 @@ public class AVL<T extends Comparable<? super T>> {
 
         AVLNode<T> dummy = new AVLNode<>(null);
         root = rRemove(root, data, dummy);
-
-        if (dummy.getData() == null) {
-            throw new NoSuchElementException();
-        }
 
         return dummy.getData();
     }
