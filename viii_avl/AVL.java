@@ -88,9 +88,24 @@ public class AVL<T extends Comparable<? super T>> {
      * @throws java.lang.IllegalArgumentException If the data is null.
      * @throws java.util.NoSuchElementException   If the data is not found.
      */
+    private AVLNode<T> rRemove(AVLNode<T> curr, T data, AVLNode<T> dummy) {
+        return null;
+    }
+
     public T remove(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        return null;
+        if (data == null) {
+            throw new IllegalArgumentException();
+        }
+
+        AVLNode<T> dummy = new AVLNode<>(null);
+        root = rRemove(root, data, dummy);
+
+        if (dummy.getData() == null) {
+            throw new NoSuchElementException();
+        }
+
+        return dummy.getData();
     }
 
     /**
