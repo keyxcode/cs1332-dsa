@@ -36,7 +36,9 @@ public class AVL<T extends Comparable<? super T>> {
     private AVLNode<T> rAdd(AVLNode<T> curr, T data) {
         if (curr == null) {
             size += 1;
-            return new AVLNode<T>(data);
+            AVLNode<T> newNode = new AVLNode<T>(data);
+            
+            return newNode;
         }
 
         if (data.compareTo(curr.getData()) > 0) {
@@ -45,7 +47,7 @@ public class AVL<T extends Comparable<? super T>> {
             curr.setLeft(rAdd(curr.getLeft(), data));
         }
 
-        return curr;
+        return balance(curr);
     }
 
     public void add(T data) {
