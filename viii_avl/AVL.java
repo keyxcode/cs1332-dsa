@@ -88,8 +88,40 @@ public class AVL<T extends Comparable<? super T>> {
      * @throws java.lang.IllegalArgumentException If the data is null.
      * @throws java.util.NoSuchElementException   If the data is not found.
      */
-    private AVLNode<T> rRemove(AVLNode<T> curr, T data, AVLNode<T> dummy) {
+    private AVLNode<T> removeSuccessor(AVLNode<T> curr, AVLNode<T> dummy) {
         return null;
+    }
+
+    private AVLNode<T> rRemove(AVLNode<T> curr, T data, AVLNode<T> dummy) {
+        if (curr == null) {
+            return null;
+        }
+
+        if (data.compareTo(curr.getData()) < 0) {
+            curr.setLeft(rRemove(curr.getLeft(), data, dummy));
+        } else if (data.compareTo(curr.getData()) > 0) {
+            curr.setRight(rRemove(curr.getRight(), data, dummy));
+        } else {
+            size -= 1;
+            dummy.setData(curr.getData());
+
+            if (curr.getLeft() == null && curr.getRight() == null) {
+                return null;
+            }
+            if (curr.getLeft() != null || curr.getRight() == null) {
+                return curr.getLeft();
+            }
+            if (curr.getLeft() == null || curr.getRight() != null) {
+                return curr.getRight();
+            }
+
+            // 2-child case
+            AVLNode<T> successorDummy = new AVLNode<T>(null);
+            curr.setRight(removeSuccessor(curr.getRight(), successorDummy));
+            curr.setData(successorDummy.getData());
+        }
+
+        return curr;
     }
 
     public T remove(T data) {
