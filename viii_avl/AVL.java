@@ -33,8 +33,28 @@ public class AVL<T extends Comparable<? super T>> {
      * @param data The data to add.
      * @throws java.lang.IllegalArgumentException If data is null.
      */
+    private AVLNode<T> rAdd(AVLNode<T> curr, T data) {
+        if (curr == null) {
+            size += 1;
+            return new AVLNode<T>(data);
+        }
+
+        if (data.compareTo(curr.getData()) == 0) {
+            return curr;
+        }
+
+        if (data.compareTo(curr.getData()) > 0) {
+            curr.setRight(rAdd(curr.getRight(), data));
+        } else {
+            curr.setLeft(rAdd(curr.getLeft(), data));
+        }
+
+        return curr;
+    }
+
     public void add(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        root = rAdd(root, data);
     }
 
     /**
@@ -236,5 +256,9 @@ public class AVL<T extends Comparable<? super T>> {
     public int size() {
         // DO NOT MODIFY THIS METHOD!
         return size;
+    }
+
+    public String toString() {
+        return "Root: " + root.getData() + "\nSize: " + Integer.toString(size);
     }
 }
