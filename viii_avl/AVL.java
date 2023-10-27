@@ -89,7 +89,13 @@ public class AVL<T extends Comparable<? super T>> {
      * @throws java.util.NoSuchElementException   If the data is not found.
      */
     private AVLNode<T> removeSuccessor(AVLNode<T> curr, AVLNode<T> dummy) {
-        return null;
+        if (curr.getLeft() == null) {
+            dummy.setData(curr.getData());
+            return curr.getRight();
+        }
+
+        curr.setLeft(removeSuccessor(curr.getLeft(), dummy));
+        return curr;
     }
 
     private AVLNode<T> rRemove(AVLNode<T> curr, T data, AVLNode<T> dummy) {
