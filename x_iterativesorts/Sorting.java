@@ -106,6 +106,8 @@ public class Sorting {
             for (int j = i; j > 0; j--) {
                 if (comparator.compare(arr[j - 1], arr[j]) > 0) {
                     swap(arr, j - 1, j);
+                } else {
+                    break;
                 }
             }
         }
