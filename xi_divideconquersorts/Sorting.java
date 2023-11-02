@@ -120,5 +120,39 @@ public class Sorting {
      */
     public static void lsdRadixSort(int[] arr) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        // find the number with the max number of digits
+        int maxAbs = Math.abs(arr[0]);
+        int arrLength = arr.length;
+
+        for (int i = 1; i < arrLength; i++) {
+            if (Math.abs(arr[i]) > maxAbs) {
+                maxAbs = arr[i];
+            }
+        }
+
+        // find out how many digits it has
+        int numDigits = 0;
+        while (maxAbs != 0) {
+            maxAbs /= 10;
+            numDigits += 1;
+        }
+
+        // initiate buckets
+        int BUCKETS_LENGTH = 19;
+        LinkedList<Integer>[] buckets = new LinkedList[BUCKETS_LENGTH];
+        System.out.println(buckets[0]);
+        for (int i = 0; i < BUCKETS_LENGTH; i++) {
+            buckets[i] = new LinkedList<>();
+        }
+        
+        // queue up each digit
+        for (int i = 0; i < numDigits; i++) {
+            for (int j = 0; j < arrLength; j++) {
+                int digit = arr[j] % 10;
+                buckets[digit].add(arr[j]);
+            }
+        }
+
+        System.out.println(Arrays.toString(buckets));
     }
 }
