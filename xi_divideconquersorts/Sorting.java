@@ -39,25 +39,31 @@ public class Sorting {
      * @param arr        The array to be sorted.
      * @param comparator The Comparator used to compare the data in arr.
      */
-    public static <T> T[] merge(T[] firstHalf, T[] secondHalf, Comparator<T> comparator) {
-        int firstHalfLength = firstHalf.length;
-        int secondHalfLength = secondHalf.length;
+    public static <T> void merge(T[] arr, T[] left, T[] right, Comparator<T> comparator) {
+        int leftLength = left.length;
+        int rightLength = right.length;
         int i = 0;
         int j = 0;
 
-        T[] result = (T[])new Object[firstHalfLength + secondHalfLength];  
-
-        while (i < firstHalfLength && j < secondHalfLength) {
-            if (comparator.compare(firstHalf[i], secondHalf[j]) < 0) {
-                result[i + j] = firstHalf[i];
+        while (i < leftLength && j < rightLength) {
+            if (comparator.compare(left[i], right[j]) <= 0) {
+                arr[i + j] = left[i];
                 i += 1;
             } else {
-                result[i + j] = secondHalf[j];
+                arr[i + j] = right[j];
                 j += 1;
             }
         }
 
-        return result;
+        while (i < leftLength) {
+            arr[i + j] = left[i];
+            i += 1;
+        }
+
+        while (j < rightLength) {
+            arr[i + j] = right[j];
+            j += 1;
+        }
     }
 
     public static <T> void mergeSort(T[] arr, Comparator<T> comparator) {
@@ -65,20 +71,21 @@ public class Sorting {
         // divide array in half
         int arrLength = arr.length;
 
-        if (arrLength == 1) {
+        if (arrLength < 2) {
             return;
         }
 
         int midPoint = arrLength / 2;
-        T[] firstHalf = Arrays.copyOfRange(arr, 0, midPoint - 1);
-        T[] secondHalf = Arrays.copyOfRange(arr, midPoint, arrLength - 1);
+        // copyOfRange to is non-inclusive
+        T[] left = Arrays.copyOfRange(arr, 0, midPoint);
+        T[] right = Arrays.copyOfRange(arr, midPoint, arrLength);
 
         // meregeSort each half
-        mergeSort(firstHalf, comparator);
-        mergeSort(secondHalf, comparator);
+        mergeSort(left, comparator);
+        mergeSort(right, comparator);
 
         // merge two parts
-        arr = merge(firstHalf, secondHalf, comparator);
+        merge(arr, left, right, comparator);
     }
 
     /**
