@@ -40,7 +40,24 @@ public class Sorting {
      * @param comparator The Comparator used to compare the data in arr.
      */
     public static <T> T[] merge(T[] firstHalf, T[] secondHalf, Comparator<T> comparator) {
-        return null;
+        int firstHalfLength = firstHalf.length;
+        int secondHalfLength = secondHalf.length;
+        int i = 0;
+        int j = 0;
+
+        T[] result = (T[])new Object[firstHalfLength + secondHalfLength];  
+
+        while (i < firstHalfLength && j < secondHalfLength) {
+            if (comparator.compare(firstHalf[i], secondHalf[j]) < 0) {
+                result[i + j] = firstHalf[i];
+                i += 1;
+            } else {
+                result[i + j] = secondHalf[j];
+                j += 1;
+            }
+        }
+
+        return result;
     }
 
     public static <T> void mergeSort(T[] arr, Comparator<T> comparator) {
