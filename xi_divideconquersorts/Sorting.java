@@ -1,4 +1,5 @@
 package xi_divideconquersorts;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.LinkedList;
@@ -38,8 +39,29 @@ public class Sorting {
      * @param arr        The array to be sorted.
      * @param comparator The Comparator used to compare the data in arr.
      */
+    public static <T> T[] merge(T[] firstHalf, T[] secondHalf, Comparator<T> comparator) {
+        return null;
+    }
+
     public static <T> void mergeSort(T[] arr, Comparator<T> comparator) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        // divide array in half
+        int arrLength = arr.length;
+
+        if (arrLength == 1) {
+            return;
+        }
+
+        int midPoint = arrLength / 2;
+        T[] firstHalf = Arrays.copyOfRange(arr, 0, midPoint - 1);
+        T[] secondHalf = Arrays.copyOfRange(arr, midPoint, arrLength - 1);
+
+        // meregeSort each half
+        mergeSort(firstHalf, comparator);
+        mergeSort(secondHalf, comparator);
+
+        // merge two parts
+        arr = merge(firstHalf, secondHalf, comparator);
     }
 
     /**
