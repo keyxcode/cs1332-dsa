@@ -37,7 +37,7 @@ public class Sorting {
      * @param arr        The array to be sorted.
      * @param comparator The Comparator used to compare the data in arr.
      */
-    public static <T> void merge(T[] arr, T[] left, T[] right, Comparator<T> comparator) {
+    private static <T> void merge(T[] arr, T[] left, T[] right, Comparator<T> comparator) {
         int leftLength = left.length;
         int rightLength = right.length;
         int i = 0;
@@ -148,7 +148,6 @@ public class Sorting {
             // queue up number in their bucket
             for (int num : arr) {
                 int digit = (num / divider) % 10;
-                System.out.println(digit);
                 // +9 to compensate for negative digits 
                 buckets[digit + 9].add(num);
             }
