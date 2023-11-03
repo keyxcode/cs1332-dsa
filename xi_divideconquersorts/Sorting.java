@@ -1,9 +1,7 @@
 package xi_divideconquersorts;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Your implementation of various divide & conquer sorting algorithms.
@@ -129,7 +127,6 @@ public class Sorting {
                 maxAbs = Math.abs(arr[i]);
             }
         }
-        System.out.println(maxAbs);
 
         // find out how many digits (k) that number has
         int k = 0;
@@ -137,23 +134,35 @@ public class Sorting {
             maxAbs /= 10;
             k += 1;
         }
-        System.out.println(k);
 
-        // initiate buckets
+        // initialize array of buckets
         int BUCKETS_LENGTH = 19;
         LinkedList<Integer>[] buckets = new LinkedList[BUCKETS_LENGTH];
         for (int i = 0; i < BUCKETS_LENGTH; i++) {
             buckets[i] = new LinkedList<>();
         }
-        
-        // queue up each digit
+         
+        // sort each digit
+        int divider = 1;
         for (int i = 0; i < k; i++) {
-            for (int j = 0; j < arrLength; j++) {
-                int digit = arr[j] % 10;
-                buckets[digit + 9].add(arr[j]);
+            // queue up number in their bucket
+            for (int num : arr) {
+                int digit = (num / divider) % 10;
+                System.out.println(digit);
+                // +9 to compensate for negative digits 
+                buckets[digit + 9].add(num);
             }
-        }
 
-        System.out.println(Arrays.toString(buckets));
+            // unload the buckets
+            int idx = 0;
+            for (LinkedList<Integer> bucket : buckets) {
+                while (!bucket.isEmpty()) {      
+                    arr[idx] = bucket.removeFirst();
+                    idx += 1;   
+                }
+            }
+
+            divider *= 10;
+        }
     }
 }
