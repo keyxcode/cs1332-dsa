@@ -1,5 +1,4 @@
 package xi_divideconquersorts;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 
@@ -64,6 +63,19 @@ public class Sorting {
         }
     }
 
+    private static <T> T[] copyOfRange(T[] arr, int start, int end) {
+        // end is non-inclusive
+        // assume that start and end are valid numbers
+
+        T[] newArr = (T[]) new Object[end - start];
+
+        for (int i = start; i < end; i++) {
+            newArr[i - start] = arr[i];
+        }
+
+        return newArr;
+    }
+
     public static <T> void mergeSort(T[] arr, Comparator<T> comparator) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
         // divide array in half
@@ -75,8 +87,8 @@ public class Sorting {
 
         int midPoint = arrLength / 2;
         // copyOfRange to is non-inclusive
-        T[] left = Arrays.copyOfRange(arr, 0, midPoint);
-        T[] right = Arrays.copyOfRange(arr, midPoint, arrLength);
+        T[] left = copyOfRange(arr, 0, midPoint);
+        T[] right = copyOfRange(arr, midPoint, arrLength);
 
         // meregeSort each half
         mergeSort(left, comparator);
