@@ -17,7 +17,7 @@ public class SortingProgram {
         // Sorting.mergeSort(intArray, new AscendingComparator());
         // System.out.print(Arrays.toString(intArray));
 
-        int[] intArray2 = {4,0,1}; 
+        int[] intArray2 = {4,0,1,52,111,-3,-9876}; 
         Sorting.lsdRadixSort(intArray2);
     }
 }

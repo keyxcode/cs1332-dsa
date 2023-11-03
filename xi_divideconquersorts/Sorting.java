@@ -126,30 +126,31 @@ public class Sorting {
 
         for (int i = 1; i < arrLength; i++) {
             if (Math.abs(arr[i]) > maxAbs) {
-                maxAbs = arr[i];
+                maxAbs = Math.abs(arr[i]);
             }
         }
+        System.out.println(maxAbs);
 
-        // find out how many digits it has
-        int numDigits = 0;
-        while (maxAbs != 0) {
+        // find out how many digits (k) that number has
+        int k = 0;
+        while (maxAbs > 0) {
             maxAbs /= 10;
-            numDigits += 1;
+            k += 1;
         }
+        System.out.println(k);
 
         // initiate buckets
         int BUCKETS_LENGTH = 19;
         LinkedList<Integer>[] buckets = new LinkedList[BUCKETS_LENGTH];
-        System.out.println(buckets[0]);
         for (int i = 0; i < BUCKETS_LENGTH; i++) {
             buckets[i] = new LinkedList<>();
         }
         
         // queue up each digit
-        for (int i = 0; i < numDigits; i++) {
+        for (int i = 0; i < k; i++) {
             for (int j = 0; j < arrLength; j++) {
                 int digit = arr[j] % 10;
-                buckets[digit].add(arr[j]);
+                buckets[digit + 9].add(arr[j]);
             }
         }
 
