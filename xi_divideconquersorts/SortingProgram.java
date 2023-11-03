@@ -19,5 +19,6 @@ public class SortingProgram {
 
         int[] intArray2 = {4,0,1,52,111,-3,-9876}; 
         Sorting.lsdRadixSort(intArray2);
+        System.out.println(Arrays.toString(intArray2));
     }
 }

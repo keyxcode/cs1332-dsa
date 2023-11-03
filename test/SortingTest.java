@@ -50,4 +50,12 @@ public class SortingTest {
         assertArrayEquals(intArray, new int[] {0,1,2,3,4,5});
         System.err.print(intArray);
     }    
+
+    @Test
+    public void RadixSortTest2() {
+        int[] intArray = {0,-2147483648}; 
+        xi_divideconquersorts.Sorting.lsdRadixSort(intArray);
+        assertArrayEquals(intArray, new int[] {-2147483648,0});
+        System.err.print(intArray);
+    }    
 }

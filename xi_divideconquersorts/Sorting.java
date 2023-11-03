@@ -131,19 +131,22 @@ public class Sorting {
     public static void lsdRadixSort(int[] arr) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
         // find the number with the max number of digits
-        int maxAbs = Math.abs(arr[0]);
+        // the reasoning behind minNegAbs is that Math.abs(Integer.MIN_VALUE) returns the MIN_VALUE itself
+        int minNegAbs = -Math.abs(arr[0]);
         int arrLength = arr.length;
 
-        for (int i = 1; i < arrLength; i++) {
-            if (Math.abs(arr[i]) > maxAbs) {
-                maxAbs = Math.abs(arr[i]);
+        for (int i = 0; i < arrLength; i++) {
+            // cannot take absolute value of Integer.MIN_VALUE
+            int currentNegAbs = -Math.abs(arr[i]);
+            if (currentNegAbs < minNegAbs) {
+                minNegAbs = currentNegAbs;
             }
         }
 
         // find out how many digits (k) that number has
         int k = 0;
-        while (maxAbs > 0) {
-            maxAbs /= 10;
+        while (minNegAbs != 0) {
+            minNegAbs /= 10;
             k += 1;
         }
 
