@@ -18,7 +18,8 @@ public class SortingProgram {
         // System.out.print(Arrays.toString(intArray));
 
         int[] intArray2 = {4,0,1,52,111,-3,-9876}; 
-        Sorting.lsdRadixSort(intArray2);
+        int[] intArray3 = {}; 
+        Sorting.lsdRadixSort(intArray3);
         System.out.println(Arrays.toString(intArray2));
     }
 }

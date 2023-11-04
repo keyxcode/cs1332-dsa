@@ -130,11 +130,15 @@ public class Sorting {
      */
     public static void lsdRadixSort(int[] arr) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        // edge case
+        int arrLength = arr.length;
+        if (arrLength < 1) {
+            return;
+        }
+
         // find the number with the max number of digits
         // the reasoning behind minNegAbs is that Math.abs(Integer.MIN_VALUE) returns the MIN_VALUE itself
         int minNegAbs = -Math.abs(arr[0]);
-        int arrLength = arr.length;
-
         for (int i = 0; i < arrLength; i++) {
             // cannot take absolute value of Integer.MIN_VALUE
             int currentNegAbs = -Math.abs(arr[i]);
