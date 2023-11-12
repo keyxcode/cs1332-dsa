@@ -58,6 +58,14 @@ public class PatternMatching {
      */
     public static Map<Character, Integer> buildLastTable(CharSequence pattern) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        return null;
+        Map<Character, Integer> table = new HashMap<>();
+        int patternLength = pattern.length();
+
+        for (int i = 0; i < patternLength; i++) {
+            char currChar = pattern.charAt(i);
+            table.put(currChar, i);
+        }
+
+        return table;
     }
 }
