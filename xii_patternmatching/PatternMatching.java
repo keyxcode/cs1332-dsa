@@ -2,7 +2,6 @@ package xii_patternmatching;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +27,48 @@ public class PatternMatching {
      */
     public static List<Integer> boyerMoore(CharSequence pattern, CharSequence text, CharacterComparator comparator) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        return null;
+        Map<Character, Integer> lastTable = buildLastTable(pattern);
+        ArrayList<Integer> matchIdxs = new ArrayList<>();
+
+        int textLength = text.length();
+        int patternLength = pattern.length();
+
+        // i is the iterator through the text
+        int i = 0;
+        while (i < textLength - patternLength) {
+            int j = patternLength - 1;
+            // keep comparing char from right -> left of the pattern as long as match
+            while (j >= 0 && comparator.compare(text.charAt(i + j), pattern.charAt(i)) == 0) {
+                j -= 1;
+            }
+
+            // match found (j exceeds pattern length)
+            if (j == -1) {
+                matchIdxs.add(i);
+                continue;
+            }
+
+            // chars of text and pattern don't match
+            char unmatchedChar = text.charAt(i + j);
+            int shift = lastTable.getOrDefault(unmatchedChar, -1);
+            // pattern has already passed that idx 
+            // big jump
+            if (i == -1) {
+                i += patternLength;
+                continue;
+            }
+
+            if (j <= shift) {
+                i += 1;
+                continue;
+            }
+
+            // align
+            i += (j - shift);
+        }
+
+
+        return matchIdxs;
     }
 
     /**
