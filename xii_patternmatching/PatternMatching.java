@@ -35,38 +35,29 @@ public class PatternMatching {
 
         // i is the iterator through the text
         int i = 0;
-        while (i < textLength - patternLength) {
+        while (i <= textLength - patternLength) {
             int j = patternLength - 1;
             // keep comparing char from right -> left of the pattern as long as match
-            while (j >= 0 && comparator.compare(text.charAt(i + j), pattern.charAt(i)) == 0) {
+            while (j >= 0 && comparator.compare(text.charAt(i + j), pattern.charAt(j)) == 0) {
                 j -= 1;
             }
 
             // match found (j exceeds pattern length)
             if (j == -1) {
                 matchIdxs.add(i);
+                i += 1;
                 continue;
             }
 
             // chars of text and pattern don't match
             char unmatchedChar = text.charAt(i + j);
             int shift = lastTable.getOrDefault(unmatchedChar, -1);
-            // pattern has already passed that idx 
-            // big jump
-            if (i == -1) {
-                i += patternLength;
-                continue;
-            }
-
-            if (j <= shift) {
+            if (shift < j) {
+                i += j - shift;  
+            } else {
                 i += 1;
-                continue;
             }
-
-            // align
-            i += (j - shift);
         }
-
 
         return matchIdxs;
     }
@@ -109,3 +100,35 @@ public class PatternMatching {
         return table;
     }
 }
+
+// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
+// Here is the stack trace to help identify the error in your code:
+// 	at PatternMatching.boyerMoore, line number: 40 
+
+// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
+// Here is the stack trace to help identify the error in your code:
+// 	at PatternMatching.boyerMoore, line number: 40 
+
+// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds 
+
+// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
+// Here is the stack trace to help identify the error in your code:
+// 	at PatternMatching.boyerMoore, line number: 46 
+
+// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
+// Here is the stack trace to help identify the error in your code:
+// 	at PatternMatching.boyerMoore, line number: 40 
+
+// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
+// Here is the stack trace to help identify the error in your code:
+// 	at PatternMatching.boyerMoore, line number: 46 
+
+// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
+// Here is the stack trace to help identify the error in your code:
+// 	at PatternMatching.boyerMoore, line number: 40 
+
+// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds 
+
+
+// Score: 5.56 / 10.0
+// ============================================================
