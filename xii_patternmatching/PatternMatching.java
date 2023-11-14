@@ -100,35 +100,3 @@ public class PatternMatching {
         return table;
     }
 }
-
-// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
-// Here is the stack trace to help identify the error in your code:
-// 	at PatternMatching.boyerMoore, line number: 40 
-
-// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
-// Here is the stack trace to help identify the error in your code:
-// 	at PatternMatching.boyerMoore, line number: 40 
-
-// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds 
-
-// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
-// Here is the stack trace to help identify the error in your code:
-// 	at PatternMatching.boyerMoore, line number: 46 
-
-// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
-// Here is the stack trace to help identify the error in your code:
-// 	at PatternMatching.boyerMoore, line number: 40 
-
-// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
-// Here is the stack trace to help identify the error in your code:
-// 	at PatternMatching.boyerMoore, line number: 46 
-
-// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds
-// Here is the stack trace to help identify the error in your code:
-// 	at PatternMatching.boyerMoore, line number: 40 
-
-// [Test Failure: boyerBoore] [-0.56] : This boyerBoore test was inconclusive due to: org.junit.runners.model.TestTimedOutException: test timed out after 1000 milliseconds 
-
-
-// Score: 5.56 / 10.0
-// ============================================================
