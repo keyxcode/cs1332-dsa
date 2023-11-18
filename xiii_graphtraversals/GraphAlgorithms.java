@@ -49,9 +49,8 @@ public class GraphAlgorithms {
         while (!frontier.isEmpty()) {
             Vertex<T> currentVertex = frontier.remove();
             if (!visited.contains(currentVertex)) {
-                continue;
+                visited.add(currentVertex);
             }
-            visited.add(currentVertex);
 
             List<VertexDistance<T>> adjVertexDistances = graph.getAdjList().get(currentVertex.hashCode());
             
@@ -91,8 +90,25 @@ public class GraphAlgorithms {
      * @param graph The graph to search through.
      * @return List of vertices in visited order.
      */
+    private static <T> void dfsHelper(Vertex<T> current, Graph<T> graph, List<Vertex<T>> visited) {
+        if (visited.contains(current)) {
+            return;
+        }
+        visited.add(current);
+        
+        List<VertexDistance<T>> adjVertexDistances = graph.getAdjList().get(current.hashCode());
+        
+        for (VertexDistance<T> vd : adjVertexDistances) {
+            Vertex<T> adjVertex = vd.getVertex();
+            dfsHelper(adjVertex, graph, visited);
+        }
+    }
+
     public static <T> List<Vertex<T>> dfs(Vertex<T> start, Graph<T> graph) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        return null;
+        LinkedList<Vertex<T>> visited = new LinkedList<>();
+        dfsHelper(start, graph, visited);
+
+        return visited;
     }
 }
