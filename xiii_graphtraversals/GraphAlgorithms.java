@@ -42,7 +42,25 @@ public class GraphAlgorithms {
      */
     public static <T> List<Vertex<T>> bfs(Vertex<T> start, Graph<T> graph) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        return null;
+        LinkedList<Vertex<T>> frontier = new LinkedList<>();
+        LinkedList<Vertex<T>> visited = new LinkedList<>();
+        frontier.add(start);
+
+        while (!frontier.isEmpty()) {
+            Vertex<T> currentVertex = frontier.remove();
+            if (!visited.contains(currentVertex)) {
+                continue;
+            }
+            visited.add(currentVertex);
+
+            List<VertexDistance<T>> adjVertexDistances = graph.getAdjList().get(currentVertex.hashCode());
+            
+            for (VertexDistance<T> vd : adjVertexDistances) {
+                frontier.add(vd.getVertex());
+            }
+        }
+
+        return visited;
     }
 
     /**
