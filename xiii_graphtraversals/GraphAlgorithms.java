@@ -48,14 +48,16 @@ public class GraphAlgorithms {
 
         while (!frontier.isEmpty()) {
             Vertex<T> currentVertex = frontier.remove();
-            if (!visited.contains(currentVertex)) {
-                visited.add(currentVertex);
-            }
+            visited.add(currentVertex);
 
-            List<VertexDistance<T>> adjVertexDistances = graph.getAdjList().get(currentVertex.hashCode());
+            List<VertexDistance<T>> adjList = graph.getAdjList().get(currentVertex);
             
-            for (VertexDistance<T> vd : adjVertexDistances) {
-                frontier.add(vd.getVertex());
+            for (VertexDistance<T> distance : adjList) {
+                Vertex<T> adjVertex = distance.getVertex();
+
+                if (!visited.contains(adjVertex) && !frontier.contains(adjVertex)) {
+                    frontier.add(adjVertex);
+                }
             }
         }
 
