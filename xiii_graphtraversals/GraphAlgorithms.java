@@ -98,10 +98,10 @@ public class GraphAlgorithms {
         }
         visited.add(current);
         
-        List<VertexDistance<T>> adjVertexDistances = graph.getAdjList().get(current.hashCode());
+        List<VertexDistance<T>> adjList = graph.getAdjList().get(current);
         
-        for (VertexDistance<T> vd : adjVertexDistances) {
-            Vertex<T> adjVertex = vd.getVertex();
+        for (VertexDistance<T> distance : adjList) {
+            Vertex<T> adjVertex = distance.getVertex();
             dfsHelper(adjVertex, graph, visited);
         }
     }

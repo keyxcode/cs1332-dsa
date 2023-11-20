@@ -77,6 +77,7 @@ public class GraphTraversalsProgram {
 
         Graph<String> graph = new Graph<>(vertices, edges);
 
-        System.out.println(GraphAlgorithms.bfs(h, graph));
+        // System.out.println(GraphAlgorithms.bfs(h, graph));
+        System.out.println(GraphAlgorithms.dfs(h, graph));
     }
 }
