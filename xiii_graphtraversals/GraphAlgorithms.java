@@ -1,13 +1,7 @@
 package xiii_graphtraversals;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
 
 /**
  * Your implementation of various graph traversal algorithms.
@@ -47,10 +41,10 @@ public class GraphAlgorithms {
         frontier.add(start);
 
         while (!frontier.isEmpty()) {
-            Vertex<T> currentVertex = frontier.remove();
-            visited.add(currentVertex);
+            Vertex<T> current = frontier.remove();
+            visited.add(current);
 
-            List<VertexDistance<T>> adjList = graph.getAdjList().get(currentVertex);
+            List<VertexDistance<T>> adjList = graph.getAdjList().get(current);
             
             for (VertexDistance<T> distance : adjList) {
                 Vertex<T> adjVertex = distance.getVertex();
@@ -96,8 +90,8 @@ public class GraphAlgorithms {
         if (visited.contains(current)) {
             return;
         }
+
         visited.add(current);
-        
         List<VertexDistance<T>> adjList = graph.getAdjList().get(current);
         
         for (VertexDistance<T> distance : adjList) {
