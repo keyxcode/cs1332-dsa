@@ -50,6 +50,25 @@ public class GraphAlgorithms {
      */
     public static <T> Set<Edge<T>> prims(Vertex<T> start, Graph<T> graph) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-        return null;
+
+        PriorityQueue<Edge<T>> frontier = new PriorityQueue<>();
+        Set<Vertex<T>> visited = new HashSet<>();
+        Set<Edge<T>> mstEdges = new HashSet<>();
+
+        int numVertices = graph.getVertices().size();
+        int numFullMstEdges = numVertices * 2 - 1;
+
+        // enqueue all edges from the start to the frontier
+
+        while (mstEdges.size() < numFullMstEdges && !frontier.isEmpty()) {
+            Edge<T> minEdge = frontier.remove();
+            
+            // if the destination vertex w of the minEdge has not been visited
+            mstEdges.add(minEdge);
+            // mark w as visited
+            // enqueue all edges that start from w to the frontier
+        }
+
+        return mstEdges;
     }
 }
