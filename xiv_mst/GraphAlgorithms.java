@@ -1,10 +1,9 @@
 package xiv_mst;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Set;
+import java.util.List;
 
 /**
  * Your implementation of Prim's algorithm.
@@ -56,17 +55,34 @@ public class GraphAlgorithms {
         Set<Edge<T>> mstEdges = new HashSet<>();
 
         int numVertices = graph.getVertices().size();
-        int numFullMstEdges = numVertices * 2 - 1;
+        int numFullMstEdges = 2 * (numVertices - 1);
 
-        // enqueue all edges from the start to the frontier
+        List<VertexDistance<T>> vdFromStart = graph.getAdjList().get(start);
+        for (VertexDistance<T> vd : vdFromStart) {
+            frontier.add(new Edge<>(start, vd.getVertex(), vd.getDistance()));
+        }
 
         while (mstEdges.size() < numFullMstEdges && !frontier.isEmpty()) {
             Edge<T> minEdge = frontier.remove();
             
-            // if the destination vertex w of the minEdge has not been visited
-            mstEdges.add(minEdge);
-            // mark w as visited
-            // enqueue all edges that start from w to the frontier
+            if (!visited.contains(minEdge.getV())) {
+                Edge<T> revMinEdge = new Edge<>(minEdge.getV(), minEdge.getU(), minEdge.getWeight());
+                mstEdges.add(minEdge);
+                mstEdges.add(revMinEdge);
+
+                Vertex<T> v = minEdge.getV();
+                visited.add(v);
+                List<VertexDistance<T>> vdFromV = graph.getAdjList().get(v);
+                for (VertexDistance<T> vd : vdFromV) {
+                    if (!visited.contains(vd.getVertex())) {
+                        frontier.add(new Edge<>(v, vd.getVertex(), vd.getDistance()));
+                    }
+                }
+            }             
+        }
+
+        if (mstEdges.size() < numFullMstEdges) {
+            return null;
         }
 
         return mstEdges;
