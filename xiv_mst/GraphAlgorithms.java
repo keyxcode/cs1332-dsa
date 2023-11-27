@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Your implementation of Prim's algorithm.
@@ -54,25 +55,32 @@ public class GraphAlgorithms {
         Set<Vertex<T>> visited = new HashSet<>();
         Set<Edge<T>> mstEdges = new HashSet<>();
 
+        // valid mst condition
         int numVertices = graph.getVertices().size();
         int numFullMstEdges = 2 * (numVertices - 1);
 
-        List<VertexDistance<T>> vdFromStart = graph.getAdjList().get(start);
+        // add edges that start from the passed in start vertex to the frontier
+        Map<Vertex<T>, List<VertexDistance<T>>> adjList = graph.getAdjList();
+        List<VertexDistance<T>> vdFromStart = adjList.get(start);
         for (VertexDistance<T> vd : vdFromStart) {
             frontier.add(new Edge<>(start, vd.getVertex(), vd.getDistance()));
         }
 
+        // proceed kruskal's
         while (mstEdges.size() < numFullMstEdges && !frontier.isEmpty()) {
             Edge<T> minEdge = frontier.remove();
             
             if (!visited.contains(minEdge.getV())) {
-                Edge<T> revMinEdge = new Edge<>(minEdge.getV(), minEdge.getU(), minEdge.getWeight());
+                // add the min edge to the mst (both directions)
                 mstEdges.add(minEdge);
-                mstEdges.add(revMinEdge);
+                mstEdges.add(new Edge<>(minEdge.getV(), minEdge.getU(), minEdge.getWeight()));
 
+                // add the destination vertex of the min edge
                 Vertex<T> v = minEdge.getV();
                 visited.add(v);
-                List<VertexDistance<T>> vdFromV = graph.getAdjList().get(v);
+                
+                // enqueue edges that start from the destination vertex of the min edge
+                List<VertexDistance<T>> vdFromV = adjList.get(v);
                 for (VertexDistance<T> vd : vdFromV) {
                     if (!visited.contains(vd.getVertex())) {
                         frontier.add(new Edge<>(v, vd.getVertex(), vd.getDistance()));
